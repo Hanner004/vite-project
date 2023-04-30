@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import Toolbar from "../Toolbar/Toolbar";
 import ButtonToUpdate from "../Button/ButtonToUpdate";
@@ -8,9 +8,12 @@ import Error from "../Handle/Error";
 import Loading from "../Handle/Loading";
 
 import {useFetch} from "../../useFetch";
+import MyVerticallyCenteredModal from "../Modal/Modal";
 
 export default function Home() {
   const {data, loading, error} = useFetch("https://rickandmortyapi.com/api/character");
+  const [modalShow, setModalShow] = useState(true);
+
   return (
     <>
       <Toolbar />
@@ -34,6 +37,8 @@ export default function Home() {
           </div>
         ))}
       </div>
+
+      <MyVerticallyCenteredModal show={modalShow} onHide={() => setModalShow(false)} />
     </>
   );
 }
