@@ -12,8 +12,7 @@ import MyVerticallyCenteredModal from "../Modal/Modal";
 
 export default function Home() {
   const {data, loading, error} = useFetch("https://rickandmortyapi.com/api/character");
-  const [modalShow, setModalShow] = useState(true);
-
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   return (
     <>
       <Toolbar />
@@ -38,7 +37,7 @@ export default function Home() {
         ))}
       </div>
 
-      <MyVerticallyCenteredModal show={modalShow} onHide={() => setModalShow(false)} />
+      <MyVerticallyCenteredModal show={modalIsOpen} onHide={() => setModalIsOpen(false)} />
     </>
   );
 }
