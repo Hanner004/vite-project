@@ -1,8 +1,7 @@
 import React from "react";
-import {useFetch} from "../../useFetch";
-
-import Error from "../Handle/Error";
-import Loading from "../Handle/Loading";
+import Error from "../../utils/Error";
+import Loading from "../../utils/Loading";
+import {useFetch} from "../../utils/useFetch";
 
 export default function Home() {
   const {data, loading, error} = useFetch("https://rickandmortyapi.com/api/character");

@@ -12,10 +12,10 @@ export default function Modal({id, title, textbtn, body, submit}) {
           <form onSubmit={submit}>
             <div className="modal-body">{body}</div>
             <div className="modal-footer">
-              <button type="button" className="btn secondary btn-sm px-4" data-bs-dismiss="modal">
+              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
                 Cerrar
               </button>
-              <button type="submit" className="btn primary btn-sm px-4">
+              <button type="submit" className="btn btn-primary">
                 {textbtn}
               </button>
             </div>
