@@ -1,11 +1,11 @@
 import React from "react";
-import {useFetch} from "../../useFetch";
 
 import Error from "../Handle/Error";
 import Loading from "../Handle/Loading";
+import {getEditorials} from "../API/EditorialAPI";
 
-export default function Home() {
-  const {data, loading, error} = useFetch("https://rickandmortyapi.com/api/character");
+export default function Editorial() {
+  const {data, loading, error} = getEditorials();
   return (
     <>
       {/* start-toolbar */}
@@ -21,15 +21,13 @@ export default function Home() {
       <div className="row">
         {error && <Error message={error} />}
         {loading && <Loading />}
-        {data?.results?.map((character, index) => (
-          <div className="col-md-4 mb-4" key={character.id}>
+        {data?.map((result, index) => (
+          <div className="col-md-4 mb-4" key={result.editorial_id}>
             <div className="card">
-              <img src={character.image} className="card-img-top" alt={character.name} />
+              {/* <img src={result.image} className="card-img-top" alt={result.editorial_name} /> */}
               <div className="card-body">
-                <h5 className="card-title">{character.name}</h5>
-                <p className="card-text">
-                  {character.status}, {character.species}, {character.gender}
-                </p>
+                <h5 className="card-title">{result.editorial_name}</h5>
+                <p className="card-text">{result.editorial_description}</p>
                 <button className="btn btn-warning">
                   <i className="fa-solid fa-edit"></i>
                 </button>
