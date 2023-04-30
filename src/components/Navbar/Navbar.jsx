@@ -3,8 +3,8 @@ import React from "react";
 export default function Navbar() {
   return (
     <div className="row">
-      {/* mt-4 added in div class col-12 */}
-      <div className="col-12 mt-4">
+      {/* mt-4 mb-4 added in div class col-12 */}
+      <div className="col-12 mt-4 mb-4">
         {/* start-navbar */}
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           {/* ms-4 added in BookReverse <a> */}
