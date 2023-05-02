@@ -17,6 +17,11 @@ export default function Editorial() {
     getEditorials();
   }, []);
 
+  function cleanState() {
+    setEditorialName("");
+    setEditorialDescription("");
+  }
+
   function getEditorials() {
     fetch(url)
       .then((response) => response.json())
