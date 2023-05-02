@@ -153,7 +153,7 @@ export default function Editorial() {
         ))}
       </div>
       {/* end-content */}
-      {/* start-modal */}
+      {/* start-modal-add */}
       <Modal
         id="add-editorial"
         title="Agregar editorial"
@@ -188,11 +188,11 @@ export default function Editorial() {
           </>
         }
       />
-      {/* end-modal */}
-      {/* start-modal */}
+      {/* end-modal-add */}
+      {/* start-modal-update */}
       <Modal
         id="update-editorial"
-        title="Actualizar editorial"
+        title={`Actualizar editorial #${editorialId}`}
         textbtn="Actualizar"
         submit={updateEditorial}
         body={
@@ -203,6 +203,7 @@ export default function Editorial() {
                 type="text"
                 className="form-control"
                 placeholder="Nombre"
+                value={editorialName}
                 required
                 onChange={(e) => {
                   setEditorialName(e.target.value);
@@ -215,6 +216,7 @@ export default function Editorial() {
                 type="text"
                 className="form-control"
                 placeholder="Descripción"
+                value={editorialDescription}
                 required
                 onChange={(e) => {
                   setEditorialDescription(e.target.value);
@@ -224,7 +226,7 @@ export default function Editorial() {
           </>
         }
       />
-      {/* end-modal */}
+      {/* end-modal-update */}
     </>
   );
 }
