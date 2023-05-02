@@ -17,11 +17,6 @@ export default function Editorial() {
     getEditorials();
   }, []);
 
-  function cleanState() {
-    setEditorialName("");
-    setEditorialDescription("");
-  }
-
   function getEditorials() {
     fetch(url)
       .then((response) => response.json())
@@ -83,10 +78,10 @@ export default function Editorial() {
       });
   }
 
-  function deleteEditorial(editorialId: number) {
+  function deleteEditorial(editorial_id: number) {
     Swal.fire({
       title: "¿Estás seguro de eliminar este editorial?",
-      text: `Estás a punto de eliminar el editorial con el identificador #${editorialId}. ¿Estás seguro de que deseas continuar? Esta acción no se puede deshacer. Por favor, asegúrate de que esta sea la acción que deseas tomar antes de proceder.`,
+      text: `Estás a punto de eliminar el editorial con el identificador #${editorial_id}. ¿Estás seguro de que deseas continuar? Esta acción no se puede deshacer. Por favor, asegúrate de que esta sea la acción que deseas tomar antes de proceder.`,
       icon: "question",
       showCancelButton: true,
       cancelButtonText: "Cancelar",
@@ -95,7 +90,7 @@ export default function Editorial() {
       reverseButtons: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`${url}/${editorialId}`, {method: "DELETE"})
+        fetch(`${url}/${editorial_id}`, {method: "DELETE"})
           .then((response) => response.json())
           .then((data) => console.log(data))
           .catch((error) => setError(error.message))
