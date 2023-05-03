@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {editorialAPI} from "../../utils/routesFormat";
 import Swal from "sweetalert2";
 import Toolbar from "../Toolbar/Toolbar";
 import Error from "../../utils/Error";
 
 export default function Editorial() {
-  const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [editorials, setEditorials] = useState([]);
 
@@ -74,7 +73,7 @@ export default function Editorial() {
               showConfirmButton: false,
               timer: 2000,
             });
-            navigate("/editorial");
+            getEditorials();
           });
       }
     });
