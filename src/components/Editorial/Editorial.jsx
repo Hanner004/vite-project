@@ -31,7 +31,7 @@ export default function Editorial() {
               <img src="/editorial.jpg" className="card-img-top" alt={item.editorial_name} />
               <div className="card-body">
                 <h5 className="card-title">
-                  {item.editorial_id} - {item.editorial_name}
+                  #{item.editorial_id} - {item.editorial_name}
                 </h5>
                 <p className="card-text">{item.editorial_description}</p>
                 <Link to={`/editorial/update/${item.editorial_id}`} className="btn btn-warning">

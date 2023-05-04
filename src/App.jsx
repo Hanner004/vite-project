@@ -7,6 +7,10 @@ import Editorial from "./components/Editorial/Editorial";
 import CreateEditorial from "./components/Editorial/CreateEditorial";
 import UpdateEditorial from "./components/Editorial/UpdateEditorial";
 
+import Author from "./components/Author/Author";
+import CreateAuthor from "./components/Author/CreateAuthor";
+import UpdateAuthor from "./components/Author/UpdateAuthor";
+
 import NotFound from "./utils/NotFound";
 import Footer from "./components/Footer/Footer";
 
@@ -22,6 +26,10 @@ function App() {
           <Route path="/editorial" element={<Editorial />}></Route>
           <Route path="/editorial/create" element={<CreateEditorial />}></Route>
           <Route path="/editorial/update/:editorialId" element={<UpdateEditorial />}></Route>
+
+          <Route path="/author" element={<Author />}></Route>
+          <Route path="/author/create" element={<CreateAuthor />}></Route>
+          <Route path="/author/update/:authorId" element={<UpdateAuthor />}></Route>
 
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
