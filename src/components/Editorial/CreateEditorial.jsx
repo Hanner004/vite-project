@@ -46,7 +46,7 @@ export default function CreateEditorial() {
           <div className="form-title p-3 border-bottom">
             <h3 className="m-0">Agregar editorial</h3>
           </div>
-          <div className="form-body p-3 border-bottom">
+          <div className="form-body border-bottom p-3">
             <div className="mb-3">
               <label className="form-label">Nombre</label>
               <input

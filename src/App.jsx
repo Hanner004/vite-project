@@ -11,6 +11,10 @@ import Author from "./components/Author/Author";
 import CreateAuthor from "./components/Author/CreateAuthor";
 import UpdateAuthor from "./components/Author/UpdateAuthor";
 
+import Book from "./components/Book/Book";
+import CreateBook from "./components/Book/CreateBook";
+import UpdateBook from "./components/Book/UpdateBook";
+
 import NotFound from "./utils/NotFound";
 import Footer from "./components/Footer/Footer";
 
@@ -30,6 +34,10 @@ function App() {
           <Route path="/author" element={<Author />}></Route>
           <Route path="/author/create" element={<CreateAuthor />}></Route>
           <Route path="/author/update/:authorId" element={<UpdateAuthor />}></Route>
+
+          <Route path="/book" element={<Book />}></Route>
+          <Route path="/book/create" element={<CreateBook />}></Route>
+          <Route path="/book/update/:bookId" element={<UpdateBook />}></Route>
 
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
