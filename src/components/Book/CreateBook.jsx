@@ -97,7 +97,7 @@ export default function CreateBook() {
             <div className="mb-3">
               <label className="form-label">Cantidad MAX</label>
               <input
-                type="text"
+                type="number"
                 className="form-control"
                 placeholder="Cantidad MAX"
                 required

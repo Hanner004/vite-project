@@ -26,7 +26,7 @@ export default function Book() {
       <Toolbar toPath={"/book/create"} />
       <div className="row">
         {error && <Error message={error} />}
-        {books && <InfoNotFound />}
+        {books.length === 0 && <InfoNotFound />}
         {books?.map((item) => (
           <div className="col-md-3 mb-4" key={item.book_id}>
             <div className="card">

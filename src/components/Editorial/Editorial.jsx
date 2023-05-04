@@ -26,7 +26,7 @@ export default function Editorial() {
       <Toolbar toPath={"/editorial/create"} />
       <div className="row">
         {error && <Error message={error} />}
-        {editorials && <InfoNotFound />}
+        {editorials.length === 0 && <InfoNotFound />}
         {editorials?.map((item) => (
           <div className="col-md-3 mb-4" key={item.editorial_id}>
             <div className="card">
