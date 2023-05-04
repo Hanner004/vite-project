@@ -4,6 +4,7 @@ import {editorialAPI} from "../../utils/routesFormat";
 import Swal from "sweetalert2";
 import Toolbar from "../Toolbar/Toolbar";
 import Error from "../../utils/Error";
+import InfoNotFound from "../../utils/InfoNotFound";
 
 export default function Editorial() {
   const [error, setError] = useState(null);
@@ -25,6 +26,7 @@ export default function Editorial() {
       <Toolbar toPath={"/editorial/create"} />
       <div className="row">
         {error && <Error message={error} />}
+        {editorials && <InfoNotFound />}
         {editorials?.map((item) => (
           <div className="col-md-3 mb-4" key={item.editorial_id}>
             <div className="card">

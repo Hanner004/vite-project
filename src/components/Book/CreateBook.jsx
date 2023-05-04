@@ -131,7 +131,7 @@ export default function CreateBook() {
                 <AuthorDropdown authors={authors} authorOptionClick={(option) => authorOptionClick(option)} />
               </div>
               <div className="col-10">
-                <input type="text" className="form-control" placeholder="Author" required disabled value={authorOption.author_name} />
+                <input type="text" className="form-control" placeholder="Autor" required disabled value={authorOption.author_name} />
               </div>
             </div>
           </div>

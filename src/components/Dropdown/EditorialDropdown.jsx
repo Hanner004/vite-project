@@ -4,7 +4,7 @@ export default function EditorialDropdown({editorials, editorialOptionClick}) {
   return (
     <div className="dropdown">
       <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Editorial
+        Editorial del libro&nbsp;
       </button>
       <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
         {editorials.map((option, index) => (

@@ -4,6 +4,7 @@ import {booksAPI} from "../../utils/routesFormat";
 import Swal from "sweetalert2";
 import Toolbar from "../Toolbar/Toolbar";
 import Error from "../../utils/Error";
+import InfoNotFound from "../../utils/InfoNotFound";
 
 export default function Book() {
   const [error, setError] = useState(null);
@@ -25,6 +26,7 @@ export default function Book() {
       <Toolbar toPath={"/book/create"} />
       <div className="row">
         {error && <Error message={error} />}
+        {books && <InfoNotFound />}
         {books?.map((item) => (
           <div className="col-md-3 mb-4" key={item.book_id}>
             <div className="card">
