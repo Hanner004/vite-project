@@ -26,7 +26,7 @@ export default function Editorial() {
       <div className="row">
         {error && <Error message={error} />}
         {editorials?.map((item) => (
-          <div className="col-md-4 mb-4" key={item.editorial_id}>
+          <div className="col-md-3 mb-4" key={item.editorial_id}>
             <div className="card">
               <img src="/editorial.jpg" className="card-img-top" alt={item.editorial_name} />
               <div className="card-body">

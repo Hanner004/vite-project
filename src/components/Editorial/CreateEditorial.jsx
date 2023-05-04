@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {editorialAPI} from "../../utils/routesFormat"
+import {editorialAPI} from "../../utils/routesFormat";
 import Swal from "sweetalert2";
 
 export default function CreateEditorial() {

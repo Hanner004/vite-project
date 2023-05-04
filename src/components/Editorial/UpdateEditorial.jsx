@@ -10,8 +10,7 @@ export default function UpdateEditorial() {
   const [editorialName, setEditorialName] = useState("");
   const [editorialDescription, setEditorialDescription] = useState("");
 
-  useEffect(() => {
-    //find by id
+  function getEditorialById() {
     fetch(editorialAPI + `/${editorialId}`)
       .then((response) => response.json())
       .then((data) => {
@@ -19,6 +18,10 @@ export default function UpdateEditorial() {
         setEditorialDescription(data.editorial_description);
       })
       .catch((error) => console.log(error.message));
+  }
+
+  useEffect(() => {
+    getEditorialById();
   }, []);
 
   function handleUpdate(event) {
