@@ -1,20 +1,21 @@
+import axios from "axios";
+import Swal from "sweetalert2";
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import {editorialAPI} from "../../utils/routesFormat";
-import Swal from "sweetalert2";
 import Toolbar from "../Toolbar/Toolbar";
 import Error from "../../utils/Error";
 import InfoNotFound from "../../utils/InfoNotFound";
+import {editorialAPI} from "../../utils/routesFormat";
 
 export default function Editorial() {
   const [error, setError] = useState(null);
   const [editorials, setEditorials] = useState([]);
 
-  function getEditorials() {
-    fetch(editorialAPI)
-      .then((response) => response.json())
-      .then((data) => setEditorials(data))
-      .catch((error) => setError(error.message));
+  async function getEditorials() {
+    await axios
+      .get(editorialAPI)
+      .then(({data}) => setEditorials(data))
+      .catch(({message}) => setError(message));
   }
 
   useEffect(() => {
@@ -51,7 +52,7 @@ export default function Editorial() {
     </>
   );
 
-  function deleteEditorial(editorial_id) {
+  async function deleteEditorial(editorial_id) {
     Swal.fire({
       title: "¿Estás seguro de eliminar este editorial?",
       text: `Estás a punto de eliminar el editorial con el identificador #${editorial_id}. ¿Estás seguro de que deseas continuar? Esta acción no se puede deshacer. Por favor, asegúrate de que esta sea la acción que deseas tomar antes de proceder.`,
@@ -61,22 +62,20 @@ export default function Editorial() {
       confirmButtonText: "Aceptar",
       confirmButtonColor: "#20515C",
       reverseButtons: true,
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        fetch(editorialAPI + `/${editorial_id}`, {method: "DELETE"})
-          .then((response) => response.json())
-          .then((data) => console.log(data))
-          .catch((error) => console.log(error.message))
-          .finally(() => {
-            Swal.fire({
-              icon: "success",
-              title: "Editorial eliminado",
-              text: "Editorial eliminado correctamente.",
-              showConfirmButton: false,
-              timer: 2000,
-            });
-            getEditorials();
+        await axios.delete(editorialAPI + `/${editorial_id}`).then(({data, statusText}) => {
+          console.log(statusText);
+          console.log(data);
+          Swal.fire({
+            icon: "success",
+            title: `Editorial #${editorial_id} eliminado`,
+            text: `Editorial eliminado correctamente.`,
+            showConfirmButton: false,
+            timer: 2000,
           });
+          getEditorials();
+        });
       }
     });
   }

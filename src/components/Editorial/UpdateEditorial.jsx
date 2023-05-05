@@ -1,6 +1,7 @@
+import axios from "axios";
+import Swal from "sweetalert2";
 import React, {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
-import Swal from "sweetalert2";
 import {editorialAPI} from "../../utils/routesFormat";
 
 export default function UpdateEditorial() {
@@ -10,50 +11,53 @@ export default function UpdateEditorial() {
   const [editorialName, setEditorialName] = useState("");
   const [editorialDescription, setEditorialDescription] = useState("");
 
-  function getEditorialById() {
-    fetch(editorialAPI + `/${editorialId}`)
-      .then((response) => response.json())
-      .then((data) => {
+  async function getEditorialById() {
+    await axios
+      .get(editorialAPI + `/${editorialId}`)
+      .then(({data}) => {
         setEditorialName(data.editorial_name);
         setEditorialDescription(data.editorial_description);
       })
-      .catch((error) => console.log(error.message));
+      .catch(({message}) => console.log(message));
   }
 
   useEffect(() => {
     getEditorialById();
   }, []);
 
-  function handleUpdate(event) {
+  async function handleUpdate(event) {
     event.preventDefault();
-    fetch(editorialAPI + `/${editorialId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+
+    await axios
+      .put(editorialAPI + `/${editorialId}`, {
         name: editorialName,
         description: editorialDescription,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.log(error.message))
-      .finally(() => {
+      })
+      .then(({data, statusText}) => {
+        console.log(statusText);
+        console.log(data);
         Swal.fire({
           icon: "success",
-          title: "Editorial editado",
+          title: `Editorial #${editorialId} editado`,
           text: "Editorial actualizado correctamente.",
           showConfirmButton: false,
           timer: 2000,
         });
         navigate("/editorial");
+      })
+      .catch(({response}) => {
+        const {data} = response;
+        Swal.fire({
+          icon: "error",
+          title: response.statusText,
+          text: data.message[0],
+        });
       });
   }
 
-  const handleCancel = () => {
+  async function handleCancel() {
     navigate("/editorial");
-  };
+  }
 
   return (
     <div className="row">
@@ -64,7 +68,7 @@ export default function UpdateEditorial() {
           </div>
           <div className="form-body border-bottom p-3">
             <div className="mb-3">
-              <label className="form-label">Nombre</label>
+              <label className="form-label">Nombre de la editorial</label>
               <input
                 type="text"
                 className="form-control"
@@ -77,7 +81,7 @@ export default function UpdateEditorial() {
               />
             </div>
             <div className="mb-3">
-              <label className="form-label">Descripción</label>
+              <label className="form-label">Descripción de la editorial</label>
               <input
                 type="text"
                 className="form-control"
