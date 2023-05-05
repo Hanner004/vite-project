@@ -1,6 +1,7 @@
+import axios from "axios";
+import Swal from "sweetalert2";
 import React, {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
-import Swal from "sweetalert2";
 import {authorAPI} from "../../utils/routesFormat";
 
 export default function UpdateAuthor() {
@@ -10,50 +11,52 @@ export default function UpdateAuthor() {
   const [authorName, setAuthorName] = useState("");
   const [authorLastname, setAuthorLastname] = useState("");
 
-  function getAuthorById() {
-    fetch(authorAPI + `/${authorId}`)
-      .then((response) => response.json())
-      .then((data) => {
+  async function getAuthorById() {
+    await axios
+      .get(authorAPI + `/${authorId}`)
+      .then(({data}) => {
         setAuthorName(data.author_name);
         setAuthorLastname(data.author_lastname);
       })
-      .catch((error) => console.log(error.message));
+      .catch(({message}) => console.log(message));
   }
 
   useEffect(() => {
     getAuthorById();
   }, []);
 
-  function handleUpdate(event) {
+  async function handleUpdate(event) {
     event.preventDefault();
-    fetch(authorAPI + `/${authorId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    await axios
+      .put(authorAPI + `/${authorId}`, {
         name: authorName,
         lastname: authorLastname,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.log(error.message))
-      .finally(() => {
+      })
+      .then(({data, statusText}) => {
+        console.log(statusText);
+        console.log(data);
         Swal.fire({
           icon: "success",
-          title: "Autor editado",
+          title: `Autor #${authorId} editado`,
           text: "Autor actualizado correctamente.",
           showConfirmButton: false,
           timer: 2000,
         });
         navigate("/author");
+      })
+      .catch(({response}) => {
+        const {data} = response;
+        Swal.fire({
+          icon: "error",
+          title: response.statusText,
+          text: data.message[0],
+        });
       });
   }
 
-  const handleCancel = () => {
+  async function handleCancel() {
     navigate("/author");
-  };
+  }
 
   return (
     <div className="row">
@@ -64,7 +67,7 @@ export default function UpdateAuthor() {
           </div>
           <div className="form-body border-bottom p-3">
             <div className="mb-3">
-              <label className="form-label">Nombre</label>
+              <label className="form-label">Nombre del autor</label>
               <input
                 type="text"
                 className="form-control"
@@ -77,7 +80,7 @@ export default function UpdateAuthor() {
               />
             </div>
             <div className="mb-3">
-              <label className="form-label">Apellido</label>
+              <label className="form-label">Apellido del autor</label>
               <input
                 type="text"
                 className="form-control"
@@ -92,7 +95,7 @@ export default function UpdateAuthor() {
           </div>
           <div className="form-footer p-3">
             <button type="submit" className="btn btn-primary mr-2">
-              Actualizar
+              Actualizar autor
             </button>
             &nbsp;
             <button type="button" className="btn btn-secondary" onClick={handleCancel}>

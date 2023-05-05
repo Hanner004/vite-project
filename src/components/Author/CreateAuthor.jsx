@@ -1,43 +1,46 @@
+import axios from "axios";
+import Swal from "sweetalert2";
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {authorAPI} from "../../utils/routesFormat";
-import Swal from "sweetalert2";
 
 export default function CreateAuthor() {
   const navigate = useNavigate();
   const [authorName, setAuthorName] = useState("");
   const [authorLastname, setAuthorLastname] = useState("");
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    fetch(authorAPI, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    await axios
+      .post(authorAPI, {
         name: authorName,
         lastname: authorLastname,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.log(error.message))
-      .finally(() => {
+      })
+      .then(({data, statusText}) => {
+        console.log(statusText);
+        console.log(data);
         Swal.fire({
           icon: "success",
-          title: "Autor agregado",
-          text: "Autor agregado correctamente.",
+          title: `Autor #${data.id} agregado`,
+          text: `Autor agregado correctamente.`,
           showConfirmButton: false,
           timer: 2000,
         });
         navigate("/author");
+      })
+      .catch(({response}) => {
+        const {data} = response;
+        Swal.fire({
+          icon: "error",
+          title: response.statusText,
+          text: data.message[0],
+        });
       });
   }
 
-  const handleCancel = () => {
+  async function handleCancel() {
     navigate("/author");
-  };
+  }
 
   return (
     <div className="row">
@@ -48,7 +51,7 @@ export default function CreateAuthor() {
           </div>
           <div className="form-body border-bottom p-3">
             <div className="mb-3">
-              <label className="form-label">Nombre</label>
+              <label className="form-label">Nombre del autor</label>
               <input
                 type="text"
                 className="form-control"
@@ -60,7 +63,7 @@ export default function CreateAuthor() {
               />
             </div>
             <div className="mb-3">
-              <label className="form-label">Apellido</label>
+              <label className="form-label">Apellido del autor</label>
               <input
                 type="text"
                 className="form-control"
@@ -74,7 +77,7 @@ export default function CreateAuthor() {
           </div>
           <div className="form-footer p-3">
             <button type="submit" className="btn btn-primary mr-2">
-              Agregar
+              Agregar autor
             </button>
             &nbsp;
             <button type="button" className="btn btn-secondary" onClick={handleCancel}>

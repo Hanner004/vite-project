@@ -1,20 +1,21 @@
+import axios from "axios";
+import Swal from "sweetalert2";
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import {authorAPI} from "../../utils/routesFormat";
-import Swal from "sweetalert2";
 import Toolbar from "../Toolbar/Toolbar";
 import Error from "../../utils/Error";
 import InfoNotFound from "../../utils/InfoNotFound";
+import {authorAPI} from "../../utils/routesFormat";
 
 export default function Author() {
   const [error, setError] = useState(null);
   const [authors, setAuthors] = useState([]);
 
-  function getAuthors() {
-    fetch(authorAPI)
-      .then((response) => response.json())
-      .then((data) => setAuthors(data))
-      .catch((error) => setError(error.message));
+  async function getAuthors() {
+    await axios
+      .get(authorAPI)
+      .then(({data}) => setAuthors(data))
+      .catch(({message}) => setError(message));
   }
 
   useEffect(() => {
@@ -51,7 +52,7 @@ export default function Author() {
     </>
   );
 
-  function deleteAuthor(author_id) {
+  async function deleteAuthor(author_id) {
     Swal.fire({
       title: "¿Estás seguro de eliminar este autor?",
       text: `Estás a punto de eliminar el autor con el identificador #${author_id}. ¿Estás seguro de que deseas continuar? Esta acción no se puede deshacer. Por favor, asegúrate de que esta sea la acción que deseas tomar antes de proceder.`,
@@ -61,22 +62,20 @@ export default function Author() {
       confirmButtonText: "Aceptar",
       confirmButtonColor: "#20515C",
       reverseButtons: true,
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        fetch(authorAPI + `/${author_id}`, {method: "DELETE"})
-          .then((response) => response.json())
-          .then((data) => console.log(data))
-          .catch((error) => console.log(error.message))
-          .finally(() => {
-            Swal.fire({
-              icon: "success",
-              title: "Autor eliminado",
-              text: "Autor eliminado correctamente.",
-              showConfirmButton: false,
-              timer: 2000,
-            });
-            getAuthors();
+        await axios.delete(authorAPI + `/${author_id}`).then(({data, statusText}) => {
+          console.log(statusText);
+          console.log(data);
+          Swal.fire({
+            icon: "success",
+            title: `Autor #${author_id} eliminado`,
+            text: `Autor eliminado correctamente.`,
+            showConfirmButton: false,
+            timer: 2000,
           });
+          getAuthors();
+        });
       }
     });
   }
