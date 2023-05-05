@@ -27,7 +27,6 @@ export default function UpdateEditorial() {
 
   async function handleUpdate(event) {
     event.preventDefault();
-
     await axios
       .put(editorialAPI + `/${editorialId}`, {
         name: editorialName,
@@ -96,7 +95,7 @@ export default function UpdateEditorial() {
           </div>
           <div className="form-footer p-3">
             <button type="submit" className="btn btn-primary mr-2">
-              Actualizar
+              Actualizar editorial
             </button>
             &nbsp;
             <button type="button" className="btn btn-secondary" onClick={handleCancel}>
