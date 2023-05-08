@@ -1,0 +1,4 @@
+/* Estilos CSS para el menú hamburguesa activo */
+.navbar-collapse.collapse.show {
+  text-align: center;
+}
