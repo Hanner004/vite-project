@@ -4,3 +4,7 @@
   white-space: nowrap; /* Evita que el texto se ajuste automáticamente al ancho del div */
   text-overflow: ellipsis; /* Agrega puntos suspensivos al final del texto que se desborda */
 }
+
+.text-justify {
+  text-align: justify;
+}

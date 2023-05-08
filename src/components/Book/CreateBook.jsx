@@ -1,46 +1,43 @@
 import React, {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import axios from "axios";
 import Swal from "sweetalert2";
+import {useNavigate} from "react-router-dom";
+import {authorAPI, booksAPI, editorialAPI} from "../../utils/routesFormat";
 import EditorialDropdown from "../Dropdown/EditorialDropdown";
 import AuthorDropdown from "../Dropdown/AuthorDropdown";
 
-import {booksAPI, editorialAPI, authorAPI} from "../../utils/routesFormat";
-
 export default function CreateBook() {
+  //dropdown-data
+  const [editorials, setEditorials] = useState([]);
+  const [authors, setAuthors] = useState([]);
+
+  async function getEditorials() {
+    await axios
+      .get(editorialAPI)
+      .then(({data}) => setEditorials(data))
+      .catch(({message}) => console.log(message));
+  }
+
+  async function getAuthors() {
+    await axios
+      .get(authorAPI)
+      .then(({data}) => setAuthors(data))
+      .catch(({message}) => console.log(message));
+  }
+  useEffect(() => {
+    getEditorials();
+    getAuthors();
+  }, []);
+
+  const [editorialOption, setEditorialOption] = useState({});
+  const [authorOption, setAuthorOption] = useState({});
   const navigate = useNavigate();
   //book-state
   const [bookName, setBookName] = useState("");
   const [bookAvailableQuantity, setBookAvailableQuantity] = useState(null);
   const [bookLibraryLocation, setBookLibraryLocation] = useState("");
 
-  //dropdown-editorials
-  const [editorials, setEditorials] = useState([]);
-  const [editorialOption, setEditorialOption] = useState({});
-
-  //dropdown-authors
-  const [authors, setAuthors] = useState([]);
-  const [authorOption, setAuthorOption] = useState({});
-
-  useEffect(() => {
-    getEditorials();
-    getAuthor();
-  }, []);
-
-  function getEditorials() {
-    fetch(editorialAPI)
-      .then((response) => response.json())
-      .then((data) => setEditorials(data))
-      .catch((error) => console.log(error.message));
-  }
-
-  function getAuthor() {
-    fetch(authorAPI)
-      .then((response) => response.json())
-      .then((data) => setAuthors(data))
-      .catch((error) => console.log(error.message));
-  }
-
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     if (!authorOption.author_id || !editorialOption.editorial_id) {
       Swal.fire({
@@ -49,38 +46,40 @@ export default function CreateBook() {
         text: "El autor y editorial son requeridos",
       });
     } else {
-      fetch(booksAPI, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      await axios
+        .post(booksAPI, {
           name: bookName,
           available_quantity: Number(bookAvailableQuantity),
           library_location: bookLibraryLocation,
           authorId: authorOption.author_id,
           editorialId: editorialOption.editorial_id,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .catch((error) => console.log(error.message))
-        .finally(() => {
+        })
+        .then(({data, statusText}) => {
+          console.log(statusText);
+          console.log(data);
           Swal.fire({
             icon: "success",
-            title: "Libro agregado",
-            text: "Libro agregado correctamente.",
+            title: `Libro #${data.id} agregado`,
+            text: `Libro agregado correctamente.`,
             showConfirmButton: false,
             timer: 2000,
           });
           navigate("/book");
+        })
+        .catch(({response}) => {
+          const {data} = response;
+          Swal.fire({
+            icon: "error",
+            title: response.statusText,
+            text: data.message[0],
+          });
         });
     }
   }
 
-  const handleCancel = () => {
+  async function handleCancel() {
     navigate("/book");
-  };
+  }
 
   return (
     <div className="row">
@@ -90,8 +89,9 @@ export default function CreateBook() {
             <h3 className="m-0">Agregar libro</h3>
           </div>
           <div className="form-body border-bottom p-3">
+            {/* form */}
             <div className="mb-3">
-              <label className="form-label">Nombre</label>
+              <label className="form-label">Nombre del libro</label>
               <input
                 type="text"
                 className="form-control"
@@ -102,6 +102,7 @@ export default function CreateBook() {
                 }}
               />
             </div>
+
             <div className="mb-3">
               <label className="form-label">Cantidad MAX</label>
               <input
@@ -114,6 +115,7 @@ export default function CreateBook() {
                 }}
               />
             </div>
+
             <div className="mb-3">
               <label className="form-label">Ubicación en la biblioteca</label>
               <input
@@ -126,6 +128,8 @@ export default function CreateBook() {
                 }}
               />
             </div>
+
+            {/* start-editorial-dropdown */}
             <div className="row mb-3">
               <div className="col-md-4">
                 <EditorialDropdown editorials={editorials} editorialOptionClick={(option) => editorialOptionClick(option)} />
@@ -134,6 +138,9 @@ export default function CreateBook() {
                 <input type="text" className="form-control" placeholder="Editorial" required disabled value={editorialOption.editorial_name} />
               </div>
             </div>
+            {/* end-editorial-dropdown */}
+
+            {/* start-author-dropdown */}
             <div className="row mb-3">
               <div className="col-md-4">
                 <AuthorDropdown authors={authors} authorOptionClick={(option) => authorOptionClick(option)} />
@@ -142,10 +149,12 @@ export default function CreateBook() {
                 <input type="text" className="form-control" placeholder="Autor" required disabled value={authorOption.author_name} />
               </div>
             </div>
+            {/* end-author-dropdown */}
+            {/* end-form */}
           </div>
           <div className="form-footer p-3">
             <button type="submit" className="btn btn-primary mr-2">
-              Agregar
+              Agregar libro
             </button>
             &nbsp;
             <button type="button" className="btn btn-secondary" onClick={handleCancel}>
@@ -157,12 +166,11 @@ export default function CreateBook() {
     </div>
   );
 
-  function editorialOptionClick(option) {
+  async function editorialOptionClick(option) {
     setEditorialOption(option);
-    console.log(option);
   }
 
-  function authorOptionClick(option) {
+  async function authorOptionClick(option) {
     setAuthorOption(option);
   }
 }

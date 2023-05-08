@@ -1,20 +1,21 @@
+import axios from "axios";
+import Swal from "sweetalert2";
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import {booksAPI} from "../../utils/routesFormat";
-import Swal from "sweetalert2";
 import Toolbar from "../Toolbar/Toolbar";
 import Error from "../../utils/Error";
 import InfoNotFound from "../../utils/InfoNotFound";
+import {booksAPI} from "../../utils/routesFormat";
 
 export default function Book() {
   const [error, setError] = useState(null);
   const [books, setBooks] = useState([]);
 
-  function getBooks() {
-    fetch(booksAPI)
-      .then((response) => response.json())
-      .then((data) => setBooks(data))
-      .catch((error) => setError(error.message));
+  async function getBooks() {
+    await axios
+      .get(booksAPI)
+      .then(({data}) => setBooks(data))
+      .catch(({message}) => setError(message));
   }
 
   useEffect(() => {
@@ -53,7 +54,7 @@ export default function Book() {
     </>
   );
 
-  function deleteBook(book_id) {
+  async function deleteBook(book_id) {
     Swal.fire({
       title: "¿Estás seguro de eliminar este libro?",
       text: `Estás a punto de eliminar el libro con el identificador #${book_id}. ¿Estás seguro de que deseas continuar? Esta acción no se puede deshacer. Por favor, asegúrate de que esta sea la acción que deseas tomar antes de proceder.`,
@@ -63,22 +64,20 @@ export default function Book() {
       confirmButtonText: "Aceptar",
       confirmButtonColor: "#20515C",
       reverseButtons: true,
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        fetch(booksAPI + `/${book_id}`, {method: "DELETE"})
-          .then((response) => response.json())
-          .then((data) => console.log(data))
-          .catch((error) => console.log(error.message))
-          .finally(() => {
-            Swal.fire({
-              icon: "success",
-              title: "Libro eliminado",
-              text: "Libro eliminado correctamente.",
-              showConfirmButton: false,
-              timer: 2000,
-            });
-            getBooks();
+        await axios.delete(booksAPI + `/${book_id}`).then(({data, statusText}) => {
+          console.log(statusText);
+          console.log(data);
+          Swal.fire({
+            icon: "success",
+            title: `Libro #${book_id} eliminado`,
+            text: `Libro eliminado correctamente.`,
+            showConfirmButton: false,
+            timer: 2000,
           });
+          getBooks();
+        });
       }
     });
   }
