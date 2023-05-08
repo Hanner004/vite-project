@@ -1,16 +1,17 @@
 import React from "react";
+import {useNavigate} from "react-router-dom";
 
 import "./Navbar.css";
 
 export default function Navbar() {
+  const navigate = useNavigate();
   return (
     <div className="row">
       {/* mt-4 mb-4 added in div class col-12 */}
       <div className="col-12 mt-4 mb-4">
-        {/* start-navbar */}
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           {/* ms-4 added in BookReverse <a> */}
-          <a className="navbar-brand ms-4" href="/">
+          <a className="navbar-brand ms-4" onClick={() => navigate("/")}>
             BookReserve
           </a>
           {/* me-4 added in navbar-toggler button */}
@@ -20,34 +21,33 @@ export default function Navbar() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link" href="/">
+                <a className="nav-link" onClick={() => navigate("/")}>
                   Home
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/editorial">
+                <a className="nav-link" onClick={() => navigate("/editorial")}>
                   Editorial
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/author">
+                <a className="nav-link" onClick={() => navigate("/author")}>
                   Autores
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/book">
+                <a className="nav-link" onClick={() => navigate("/book")}>
                   Libros
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link disabled" href="/reservation">
+                <a className="nav-link" onClick={() => navigate("/reservation")}>
                   Reserve
                 </a>
               </li>
             </ul>
           </div>
         </nav>
-        {/* end-navbar */}
       </div>
     </div>
   );
