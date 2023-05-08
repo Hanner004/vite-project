@@ -135,7 +135,7 @@ export default function CreateBook() {
                 <EditorialDropdown editorials={editorials} editorialOptionClick={(option) => editorialOptionClick(option)} />
               </div>
               <div className="col-md-8">
-                <input type="text" className="form-control" placeholder="Editorial" required disabled value={editorialOption.editorial_name} />
+                <input type="text" className="form-control" placeholder="Editorial" required disabled value={editorialOption.editorial_name || ""} />
               </div>
             </div>
             {/* end-editorial-dropdown */}
@@ -146,7 +146,7 @@ export default function CreateBook() {
                 <AuthorDropdown authors={authors} authorOptionClick={(option) => authorOptionClick(option)} />
               </div>
               <div className="col-md-8">
-                <input type="text" className="form-control" placeholder="Autor" required disabled value={authorOption.author_name} />
+                <input type="text" className="form-control" placeholder="Autor" required disabled value={authorOption.author_name || ""} />
               </div>
             </div>
             {/* end-author-dropdown */}
