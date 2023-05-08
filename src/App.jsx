@@ -15,7 +15,7 @@ import Book from "./components/Book/Book";
 import CreateBook from "./components/Book/CreateBook";
 import UpdateBook from "./components/Book/UpdateBook";
 
-import NotFound from "./utils/NotFound";
+import PageNotFound from "./utils/PageNotFound";
 import Footer from "./components/Footer/Footer";
 
 function App() {
@@ -39,7 +39,7 @@ function App() {
           <Route path="/book/create" element={<CreateBook />}></Route>
           <Route path="/book/update/:bookId" element={<UpdateBook />}></Route>
 
-          <Route path="*" element={<NotFound />}></Route>
+          <Route path="*" element={<PageNotFound />}></Route>
         </Routes>
         {/* <Footer /> */}
       </div>
