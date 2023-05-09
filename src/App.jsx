@@ -29,17 +29,11 @@ function App() {
 
           <Route path="/editorial" element={<Editorial />}></Route>
           <Route path="/editorial/create" element={<CreateEditorial />}></Route>
-          <Route
-            path="/editorial/update/:editorialId"
-            element={<UpdateEditorial />}
-          ></Route>
+          <Route path="/editorial/update/:editorialId" element={<UpdateEditorial />}></Route>
 
           <Route path="/author" element={<Author />}></Route>
           <Route path="/author/create" element={<CreateAuthor />}></Route>
-          <Route
-            path="/author/update/:authorId"
-            element={<UpdateAuthor />}
-          ></Route>
+          <Route path="/author/update/:authorId" element={<UpdateAuthor />}></Route>
 
           <Route path="/book" element={<Book />}></Route>
           <Route path="/book/create" element={<CreateBook />}></Route>
