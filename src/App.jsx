@@ -1,25 +1,25 @@
-import { Routes, Route, BrowserRouter } from "react-router-dom";
-import "./App.css";
-import Navbar from "./components/Navbar/Navbar";
-import Home from "./components/Home/Home";
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import './App.css';
+import Navbar from './components/Navbar/Navbar';
+import Home from './components/Home/Home';
 
-import Editorial from "./components/Editorial/Editorial";
-import CreateEditorial from "./components/Editorial/CreateEditorial";
-import UpdateEditorial from "./components/Editorial/UpdateEditorial";
+import Editorial from './components/Editorial/Editorial';
+import CreateEditorial from './components/Editorial/CreateEditorial';
+import UpdateEditorial from './components/Editorial/UpdateEditorial';
 
-import Author from "./components/Author/Author";
-import CreateAuthor from "./components/Author/CreateAuthor";
-import UpdateAuthor from "./components/Author/UpdateAuthor";
+import Author from './components/Author/Author';
+import CreateAuthor from './components/Author/CreateAuthor';
+import UpdateAuthor from './components/Author/UpdateAuthor';
 
-import Book from "./components/Book/Book";
-import CreateBook from "./components/Book/CreateBook";
-import UpdateBook from "./components/Book/UpdateBook";
+import Book from './components/Book/Book';
+import CreateBook from './components/Book/CreateBook';
+import UpdateBook from './components/Book/UpdateBook';
 
-import PageNotFound from "./utils/PageNotFound";
-import Footer from "./components/Footer/Footer";
+import PageNotFound from './utils/PageNotFound';
+import Footer from './components/Footer/Footer';
 
 function App() {
-  localStorage.setItem("API", "http://localhost:4444/api/v1/book-reserve");
+  localStorage.setItem('API', 'http://localhost:4444/api/v1/book-reserve');
   return (
     <BrowserRouter>
       <div className="container">

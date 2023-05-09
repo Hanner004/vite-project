@@ -1,6 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Alert } from "react-bootstrap";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Alert } from 'react-bootstrap';
 
 export default function PageNotFound() {
   return (

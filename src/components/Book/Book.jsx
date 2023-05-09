@@ -1,11 +1,11 @@
-import axios from "axios";
-import Swal from "sweetalert2";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import Toolbar from "../Toolbar/Toolbar";
-import Error from "../../utils/Error";
-import InfoNotFound from "../../utils/InfoNotFound";
-import { booksAPI } from "../../utils/routesFormat";
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Toolbar from '../Toolbar/Toolbar';
+import Error from '../../utils/Error';
+import InfoNotFound from '../../utils/InfoNotFound';
+import { booksAPI } from '../../utils/routesFormat';
 
 export default function Book() {
   const [error, setError] = useState(null);
@@ -24,7 +24,7 @@ export default function Book() {
 
   return (
     <>
-      <Toolbar toPath={"/book/create"} />
+      <Toolbar toPath={'/book/create'} />
       <div className="row">
         {error && <Error message={error} />}
         {books.length === 0 && <InfoNotFound />}
@@ -41,7 +41,7 @@ export default function Book() {
                   #{item.book_id} - {item.book_name}
                 </h5>
                 <p className="card-text">
-                  {item.book_library_location} - MAX:{" "}
+                  {item.book_library_location} - MAX:{' '}
                   {item.book_available_quantity}
                 </p>
                 <Link
@@ -67,13 +67,13 @@ export default function Book() {
 
   async function deleteBook(book_id) {
     Swal.fire({
-      title: "¿Estás seguro de eliminar este libro?",
+      title: '¿Estás seguro de eliminar este libro?',
       text: `Estás a punto de eliminar el libro con el identificador #${book_id}. ¿Estás seguro de que deseas continuar? Esta acción no se puede deshacer. Por favor, asegúrate de que esta sea la acción que deseas tomar antes de proceder.`,
-      icon: "question",
+      icon: 'question',
       showCancelButton: true,
-      cancelButtonText: "Cancelar",
-      confirmButtonText: "Aceptar",
-      confirmButtonColor: "#20515C",
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#20515C',
       reverseButtons: true,
     }).then(async (result) => {
       if (result.isConfirmed) {
@@ -83,7 +83,7 @@ export default function Book() {
             console.log(statusText);
             console.log(data);
             Swal.fire({
-              icon: "success",
+              icon: 'success',
               title: `Libro #${book_id} eliminado`,
               text: `Libro eliminado correctamente.`,
               showConfirmButton: false,

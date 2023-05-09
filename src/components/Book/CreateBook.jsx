@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
-import { authorAPI, booksAPI, editorialAPI } from "../../utils/routesFormat";
-import EditorialDropdown from "../Dropdown/EditorialDropdown";
-import AuthorDropdown from "../Dropdown/AuthorDropdown";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
+import { authorAPI, booksAPI, editorialAPI } from '../../utils/routesFormat';
+import EditorialDropdown from '../Dropdown/EditorialDropdown';
+import AuthorDropdown from '../Dropdown/AuthorDropdown';
 
 export default function CreateBook() {
   //dropdown-data
@@ -33,17 +33,17 @@ export default function CreateBook() {
   const [authorOption, setAuthorOption] = useState({});
   const navigate = useNavigate();
   //book-state
-  const [bookName, setBookName] = useState("");
+  const [bookName, setBookName] = useState('');
   const [bookAvailableQuantity, setBookAvailableQuantity] = useState(null);
-  const [bookLibraryLocation, setBookLibraryLocation] = useState("");
+  const [bookLibraryLocation, setBookLibraryLocation] = useState('');
 
   async function handleSubmit(event) {
     event.preventDefault();
     if (!authorOption.author_id || !editorialOption.editorial_id) {
       Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "El autor y editorial son requeridos",
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El autor y editorial son requeridos',
       });
     } else {
       await axios
@@ -58,18 +58,18 @@ export default function CreateBook() {
           console.log(statusText);
           console.log(data);
           Swal.fire({
-            icon: "success",
+            icon: 'success',
             title: `Libro #${data.id} agregado`,
             text: `Libro agregado correctamente.`,
             showConfirmButton: false,
             timer: 2000,
           });
-          navigate("/book");
+          navigate('/book');
         })
         .catch(({ response }) => {
           const { data } = response;
           Swal.fire({
-            icon: "error",
+            icon: 'error',
             title: response.statusText,
             text: data.message[0],
           });
@@ -78,7 +78,7 @@ export default function CreateBook() {
   }
 
   async function handleCancel() {
-    navigate("/book");
+    navigate('/book');
   }
 
   return (
@@ -146,7 +146,7 @@ export default function CreateBook() {
                   placeholder="Editorial"
                   required
                   disabled
-                  value={editorialOption.editorial_name || ""}
+                  value={editorialOption.editorial_name || ''}
                 />
               </div>
             </div>
@@ -167,7 +167,7 @@ export default function CreateBook() {
                   placeholder="Autor"
                   required
                   disabled
-                  value={authorOption.author_name || ""}
+                  value={authorOption.author_name || ''}
                 />
               </div>
             </div>

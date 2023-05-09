@@ -1,11 +1,11 @@
-import axios from "axios";
-import Swal from "sweetalert2";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import Toolbar from "../Toolbar/Toolbar";
-import Error from "../../utils/Error";
-import InfoNotFound from "../../utils/InfoNotFound";
-import { editorialAPI } from "../../utils/routesFormat";
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Toolbar from '../Toolbar/Toolbar';
+import Error from '../../utils/Error';
+import InfoNotFound from '../../utils/InfoNotFound';
+import { editorialAPI } from '../../utils/routesFormat';
 
 export default function Editorial() {
   const [error, setError] = useState(null);
@@ -24,7 +24,7 @@ export default function Editorial() {
 
   return (
     <>
-      <Toolbar toPath={"/editorial/create"} />
+      <Toolbar toPath={'/editorial/create'} />
       <div className="row">
         {error && <Error message={error} />}
         {editorials.length === 0 && <InfoNotFound />}
@@ -64,13 +64,13 @@ export default function Editorial() {
 
   async function deleteEditorial(editorial_id) {
     Swal.fire({
-      title: "¿Estás seguro de eliminar este editorial?",
+      title: '¿Estás seguro de eliminar este editorial?',
       text: `Estás a punto de eliminar el editorial con el identificador #${editorial_id}. ¿Estás seguro de que deseas continuar? Esta acción no se puede deshacer. Por favor, asegúrate de que esta sea la acción que deseas tomar antes de proceder.`,
-      icon: "question",
+      icon: 'question',
       showCancelButton: true,
-      cancelButtonText: "Cancelar",
-      confirmButtonText: "Aceptar",
-      confirmButtonColor: "#20515C",
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#20515C',
       reverseButtons: true,
     }).then(async (result) => {
       if (result.isConfirmed) {
@@ -80,7 +80,7 @@ export default function Editorial() {
             console.log(statusText);
             console.log(data);
             Swal.fire({
-              icon: "success",
+              icon: 'success',
               title: `Editorial #${editorial_id} eliminado`,
               text: `Editorial eliminado correctamente.`,
               showConfirmButton: false,

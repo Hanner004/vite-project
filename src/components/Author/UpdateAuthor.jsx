@@ -1,15 +1,15 @@
-import axios from "axios";
-import Swal from "sweetalert2";
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { authorAPI } from "../../utils/routesFormat";
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { authorAPI } from '../../utils/routesFormat';
 
 export default function UpdateAuthor() {
   const navigate = useNavigate();
   const { authorId } = useParams();
 
-  const [authorName, setAuthorName] = useState("");
-  const [authorLastname, setAuthorLastname] = useState("");
+  const [authorName, setAuthorName] = useState('');
+  const [authorLastname, setAuthorLastname] = useState('');
 
   async function getAuthorById() {
     await axios
@@ -36,18 +36,18 @@ export default function UpdateAuthor() {
         console.log(statusText);
         console.log(data);
         Swal.fire({
-          icon: "success",
+          icon: 'success',
           title: `Autor #${authorId} editado`,
-          text: "Autor actualizado correctamente.",
+          text: 'Autor actualizado correctamente.',
           showConfirmButton: false,
           timer: 2000,
         });
-        navigate("/author");
+        navigate('/author');
       })
       .catch(({ response }) => {
         const { data } = response;
         Swal.fire({
-          icon: "error",
+          icon: 'error',
           title: response.statusText,
           text: data.message[0],
         });
@@ -55,7 +55,7 @@ export default function UpdateAuthor() {
   }
 
   async function handleCancel() {
-    navigate("/author");
+    navigate('/author');
   }
 
   return (

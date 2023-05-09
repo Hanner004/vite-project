@@ -1,13 +1,13 @@
-import axios from "axios";
-import Swal from "sweetalert2";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { authorAPI } from "../../utils/routesFormat";
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { authorAPI } from '../../utils/routesFormat';
 
 export default function CreateAuthor() {
   const navigate = useNavigate();
-  const [authorName, setAuthorName] = useState("");
-  const [authorLastname, setAuthorLastname] = useState("");
+  const [authorName, setAuthorName] = useState('');
+  const [authorLastname, setAuthorLastname] = useState('');
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -20,18 +20,18 @@ export default function CreateAuthor() {
         console.log(statusText);
         console.log(data);
         Swal.fire({
-          icon: "success",
+          icon: 'success',
           title: `Autor #${data.id} agregado`,
           text: `Autor agregado correctamente.`,
           showConfirmButton: false,
           timer: 2000,
         });
-        navigate("/author");
+        navigate('/author');
       })
       .catch(({ response }) => {
         const { data } = response;
         Swal.fire({
-          icon: "error",
+          icon: 'error',
           title: response.statusText,
           text: data.message[0],
         });
@@ -39,7 +39,7 @@ export default function CreateAuthor() {
   }
 
   async function handleCancel() {
-    navigate("/author");
+    navigate('/author');
   }
 
   return (

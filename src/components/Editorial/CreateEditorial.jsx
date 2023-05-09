@@ -1,13 +1,13 @@
-import axios from "axios";
-import Swal from "sweetalert2";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { editorialAPI } from "../../utils/routesFormat";
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { editorialAPI } from '../../utils/routesFormat';
 
 export default function CreateEditorial() {
   const navigate = useNavigate();
-  const [editorialName, setEditorialName] = useState("");
-  const [editorialDescription, setEditorialDescription] = useState("");
+  const [editorialName, setEditorialName] = useState('');
+  const [editorialDescription, setEditorialDescription] = useState('');
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -20,18 +20,18 @@ export default function CreateEditorial() {
         console.log(statusText);
         console.log(data);
         Swal.fire({
-          icon: "success",
+          icon: 'success',
           title: `Editorial #${data.id} agregado`,
           text: `Editorial agregado correctamente.`,
           showConfirmButton: false,
           timer: 2000,
         });
-        navigate("/editorial");
+        navigate('/editorial');
       })
       .catch(({ response }) => {
         const { data } = response;
         Swal.fire({
-          icon: "error",
+          icon: 'error',
           title: response.statusText,
           text: data.message[0],
         });
@@ -39,7 +39,7 @@ export default function CreateEditorial() {
   }
 
   async function handleCancel() {
-    navigate("/editorial");
+    navigate('/editorial');
   }
 
   return (

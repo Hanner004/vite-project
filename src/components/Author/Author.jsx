@@ -1,11 +1,11 @@
-import axios from "axios";
-import Swal from "sweetalert2";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import Toolbar from "../Toolbar/Toolbar";
-import Error from "../../utils/Error";
-import InfoNotFound from "../../utils/InfoNotFound";
-import { authorAPI } from "../../utils/routesFormat";
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Toolbar from '../Toolbar/Toolbar';
+import Error from '../../utils/Error';
+import InfoNotFound from '../../utils/InfoNotFound';
+import { authorAPI } from '../../utils/routesFormat';
 
 export default function Author() {
   const [error, setError] = useState(null);
@@ -24,7 +24,7 @@ export default function Author() {
 
   return (
     <>
-      <Toolbar toPath={"/author/create"} />
+      <Toolbar toPath={'/author/create'} />
       <div className="row">
         {error && <Error message={error} />}
         {authors.length === 0 && <InfoNotFound />}
@@ -64,13 +64,13 @@ export default function Author() {
 
   async function deleteAuthor(author_id) {
     Swal.fire({
-      title: "¿Estás seguro de eliminar este autor?",
+      title: '¿Estás seguro de eliminar este autor?',
       text: `Estás a punto de eliminar el autor con el identificador #${author_id}. ¿Estás seguro de que deseas continuar? Esta acción no se puede deshacer. Por favor, asegúrate de que esta sea la acción que deseas tomar antes de proceder.`,
-      icon: "question",
+      icon: 'question',
       showCancelButton: true,
-      cancelButtonText: "Cancelar",
-      confirmButtonText: "Aceptar",
-      confirmButtonColor: "#20515C",
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor: '#20515C',
       reverseButtons: true,
     }).then(async (result) => {
       if (result.isConfirmed) {
@@ -80,7 +80,7 @@ export default function Author() {
             console.log(statusText);
             console.log(data);
             Swal.fire({
-              icon: "success",
+              icon: 'success',
               title: `Autor #${author_id} eliminado`,
               text: `Autor eliminado correctamente.`,
               showConfirmButton: false,

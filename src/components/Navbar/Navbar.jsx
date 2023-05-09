@@ -1,7 +1,7 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import "./Navbar.css";
+import './Navbar.css';
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ export default function Navbar() {
       <div className="col-12 mt-4 mb-4">
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           {/* ms-4 added in BookReverse <a> */}
-          <a className="navbar-brand ms-4" onClick={() => navigate("/")}>
+          <a className="navbar-brand ms-4" onClick={() => navigate('/')}>
             BookReserve
           </a>
           {/* me-4 added in navbar-toggler button */}
@@ -29,29 +29,29 @@ export default function Navbar() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link" onClick={() => navigate("/")}>
+                <a className="nav-link" onClick={() => navigate('/')}>
                   Home
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" onClick={() => navigate("/editorial")}>
+                <a className="nav-link" onClick={() => navigate('/editorial')}>
                   Editorial
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" onClick={() => navigate("/author")}>
+                <a className="nav-link" onClick={() => navigate('/author')}>
                   Autores
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" onClick={() => navigate("/book")}>
+                <a className="nav-link" onClick={() => navigate('/book')}>
                   Libros
                 </a>
               </li>
               <li className="nav-item">
                 <a
                   className="nav-link"
-                  onClick={() => navigate("/reservation")}
+                  onClick={() => navigate('/reservation')}
                 >
                   Reserve
                 </a>
