@@ -1,12 +1,12 @@
 import axios from "axios";
 import Swal from "sweetalert2";
-import React, {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
-import {authorAPI} from "../../utils/routesFormat";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { authorAPI } from "../../utils/routesFormat";
 
 export default function UpdateAuthor() {
   const navigate = useNavigate();
-  const {authorId} = useParams();
+  const { authorId } = useParams();
 
   const [authorName, setAuthorName] = useState("");
   const [authorLastname, setAuthorLastname] = useState("");
@@ -14,11 +14,11 @@ export default function UpdateAuthor() {
   async function getAuthorById() {
     await axios
       .get(authorAPI + `/${authorId}`)
-      .then(({data}) => {
+      .then(({ data }) => {
         setAuthorName(data.author_name);
         setAuthorLastname(data.author_lastname);
       })
-      .catch(({message}) => console.log(message));
+      .catch(({ message }) => console.log(message));
   }
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export default function UpdateAuthor() {
         name: authorName,
         lastname: authorLastname,
       })
-      .then(({data, statusText}) => {
+      .then(({ data, statusText }) => {
         console.log(statusText);
         console.log(data);
         Swal.fire({
@@ -44,8 +44,8 @@ export default function UpdateAuthor() {
         });
         navigate("/author");
       })
-      .catch(({response}) => {
-        const {data} = response;
+      .catch(({ response }) => {
+        const { data } = response;
         Swal.fire({
           icon: "error",
           title: response.statusText,
@@ -98,7 +98,11 @@ export default function UpdateAuthor() {
               Actualizar autor
             </button>
             &nbsp;
-            <button type="button" className="btn btn-secondary" onClick={handleCancel}>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={handleCancel}
+            >
               Cancel
             </button>
           </div>

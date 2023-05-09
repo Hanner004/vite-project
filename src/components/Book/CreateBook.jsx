@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
-import {useNavigate} from "react-router-dom";
-import {authorAPI, booksAPI, editorialAPI} from "../../utils/routesFormat";
+import { useNavigate } from "react-router-dom";
+import { authorAPI, booksAPI, editorialAPI } from "../../utils/routesFormat";
 import EditorialDropdown from "../Dropdown/EditorialDropdown";
 import AuthorDropdown from "../Dropdown/AuthorDropdown";
 
@@ -14,15 +14,15 @@ export default function CreateBook() {
   async function getEditorials() {
     await axios
       .get(editorialAPI)
-      .then(({data}) => setEditorials(data))
-      .catch(({message}) => console.log(message));
+      .then(({ data }) => setEditorials(data))
+      .catch(({ message }) => console.log(message));
   }
 
   async function getAuthors() {
     await axios
       .get(authorAPI)
-      .then(({data}) => setAuthors(data))
-      .catch(({message}) => console.log(message));
+      .then(({ data }) => setAuthors(data))
+      .catch(({ message }) => console.log(message));
   }
   useEffect(() => {
     getEditorials();
@@ -54,7 +54,7 @@ export default function CreateBook() {
           authorId: authorOption.author_id,
           editorialId: editorialOption.editorial_id,
         })
-        .then(({data, statusText}) => {
+        .then(({ data, statusText }) => {
           console.log(statusText);
           console.log(data);
           Swal.fire({
@@ -66,8 +66,8 @@ export default function CreateBook() {
           });
           navigate("/book");
         })
-        .catch(({response}) => {
-          const {data} = response;
+        .catch(({ response }) => {
+          const { data } = response;
           Swal.fire({
             icon: "error",
             title: response.statusText,
@@ -132,10 +132,22 @@ export default function CreateBook() {
             {/* start-editorial-dropdown */}
             <div className="row mb-3">
               <div className="col-md-4">
-                <EditorialDropdown editorials={editorials} editorialOptionClick={(option) => editorialOptionClick(option)} />
+                <EditorialDropdown
+                  editorials={editorials}
+                  editorialOptionClick={(option) =>
+                    editorialOptionClick(option)
+                  }
+                />
               </div>
               <div className="col-md-8">
-                <input type="text" className="form-control" placeholder="Editorial" required disabled value={editorialOption.editorial_name || ""} />
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Editorial"
+                  required
+                  disabled
+                  value={editorialOption.editorial_name || ""}
+                />
               </div>
             </div>
             {/* end-editorial-dropdown */}
@@ -143,10 +155,20 @@ export default function CreateBook() {
             {/* start-author-dropdown */}
             <div className="row mb-3">
               <div className="col-md-4">
-                <AuthorDropdown authors={authors} authorOptionClick={(option) => authorOptionClick(option)} />
+                <AuthorDropdown
+                  authors={authors}
+                  authorOptionClick={(option) => authorOptionClick(option)}
+                />
               </div>
               <div className="col-md-8">
-                <input type="text" className="form-control" placeholder="Autor" required disabled value={authorOption.author_name || ""} />
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Autor"
+                  required
+                  disabled
+                  value={authorOption.author_name || ""}
+                />
               </div>
             </div>
             {/* end-author-dropdown */}
@@ -157,7 +179,11 @@ export default function CreateBook() {
               Agregar libro
             </button>
             &nbsp;
-            <button type="button" className="btn btn-secondary" onClick={handleCancel}>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={handleCancel}
+            >
               Cancel
             </button>
           </div>

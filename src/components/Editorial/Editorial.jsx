@@ -1,11 +1,11 @@
 import axios from "axios";
 import Swal from "sweetalert2";
-import React, {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Toolbar from "../Toolbar/Toolbar";
 import Error from "../../utils/Error";
 import InfoNotFound from "../../utils/InfoNotFound";
-import {editorialAPI} from "../../utils/routesFormat";
+import { editorialAPI } from "../../utils/routesFormat";
 
 export default function Editorial() {
   const [error, setError] = useState(null);
@@ -14,8 +14,8 @@ export default function Editorial() {
   async function getEditorials() {
     await axios
       .get(editorialAPI)
-      .then(({data}) => setEditorials(data))
-      .catch(({message}) => setError(message));
+      .then(({ data }) => setEditorials(data))
+      .catch(({ message }) => setError(message));
   }
 
   useEffect(() => {
@@ -31,17 +31,27 @@ export default function Editorial() {
         {editorials?.map((item) => (
           <div className="col-md-3 mb-4" key={item.editorial_id}>
             <div className="card">
-              <img src="/editorial.jpg" className="card-img-top" alt={item.editorial_name} />
+              <img
+                src="/editorial.jpg"
+                className="card-img-top"
+                alt={item.editorial_name}
+              />
               <div className="card-body">
                 <h5 className="card-title">
                   #{item.editorial_id} - {item.editorial_name}
                 </h5>
                 <p className="card-text">{item.editorial_description}</p>
-                <Link to={`/editorial/update/${item.editorial_id}`} className="btn btn-warning">
+                <Link
+                  to={`/editorial/update/${item.editorial_id}`}
+                  className="btn btn-warning"
+                >
                   <i className="fa-solid fa-edit"></i>
                 </Link>
                 &nbsp;
-                <button className="btn btn-danger" onClick={() => deleteEditorial(item.editorial_id)}>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => deleteEditorial(item.editorial_id)}
+                >
                   <i className="fa-solid fa-trash"></i>
                 </button>
               </div>
@@ -64,18 +74,20 @@ export default function Editorial() {
       reverseButtons: true,
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await axios.delete(editorialAPI + `/${editorial_id}`).then(({data, statusText}) => {
-          console.log(statusText);
-          console.log(data);
-          Swal.fire({
-            icon: "success",
-            title: `Editorial #${editorial_id} eliminado`,
-            text: `Editorial eliminado correctamente.`,
-            showConfirmButton: false,
-            timer: 2000,
+        await axios
+          .delete(editorialAPI + `/${editorial_id}`)
+          .then(({ data, statusText }) => {
+            console.log(statusText);
+            console.log(data);
+            Swal.fire({
+              icon: "success",
+              title: `Editorial #${editorial_id} eliminado`,
+              text: `Editorial eliminado correctamente.`,
+              showConfirmButton: false,
+              timer: 2000,
+            });
+            getEditorials();
           });
-          getEditorials();
-        });
       }
     });
   }

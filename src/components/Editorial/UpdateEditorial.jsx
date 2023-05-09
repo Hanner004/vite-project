@@ -1,12 +1,12 @@
 import axios from "axios";
 import Swal from "sweetalert2";
-import React, {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
-import {editorialAPI} from "../../utils/routesFormat";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { editorialAPI } from "../../utils/routesFormat";
 
 export default function UpdateEditorial() {
   const navigate = useNavigate();
-  const {editorialId} = useParams();
+  const { editorialId } = useParams();
 
   const [editorialName, setEditorialName] = useState("");
   const [editorialDescription, setEditorialDescription] = useState("");
@@ -14,11 +14,11 @@ export default function UpdateEditorial() {
   async function getEditorialById() {
     await axios
       .get(editorialAPI + `/${editorialId}`)
-      .then(({data}) => {
+      .then(({ data }) => {
         setEditorialName(data.editorial_name);
         setEditorialDescription(data.editorial_description);
       })
-      .catch(({message}) => console.log(message));
+      .catch(({ message }) => console.log(message));
   }
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export default function UpdateEditorial() {
         name: editorialName,
         description: editorialDescription,
       })
-      .then(({data, statusText}) => {
+      .then(({ data, statusText }) => {
         console.log(statusText);
         console.log(data);
         Swal.fire({
@@ -44,8 +44,8 @@ export default function UpdateEditorial() {
         });
         navigate("/editorial");
       })
-      .catch(({response}) => {
-        const {data} = response;
+      .catch(({ response }) => {
+        const { data } = response;
         Swal.fire({
           icon: "error",
           title: response.statusText,
@@ -98,7 +98,11 @@ export default function UpdateEditorial() {
               Actualizar editorial
             </button>
             &nbsp;
-            <button type="button" className="btn btn-secondary" onClick={handleCancel}>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={handleCancel}
+            >
               Cancel
             </button>
           </div>

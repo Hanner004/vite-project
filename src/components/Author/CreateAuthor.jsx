@@ -1,8 +1,8 @@
 import axios from "axios";
 import Swal from "sweetalert2";
-import React, {useState} from "react";
-import {useNavigate} from "react-router-dom";
-import {authorAPI} from "../../utils/routesFormat";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { authorAPI } from "../../utils/routesFormat";
 
 export default function CreateAuthor() {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ export default function CreateAuthor() {
         name: authorName,
         lastname: authorLastname,
       })
-      .then(({data, statusText}) => {
+      .then(({ data, statusText }) => {
         console.log(statusText);
         console.log(data);
         Swal.fire({
@@ -28,8 +28,8 @@ export default function CreateAuthor() {
         });
         navigate("/author");
       })
-      .catch(({response}) => {
-        const {data} = response;
+      .catch(({ response }) => {
+        const { data } = response;
         Swal.fire({
           icon: "error",
           title: response.statusText,
@@ -80,7 +80,11 @@ export default function CreateAuthor() {
               Agregar autor
             </button>
             &nbsp;
-            <button type="button" className="btn btn-secondary" onClick={handleCancel}>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={handleCancel}
+            >
               Cancel
             </button>
           </div>

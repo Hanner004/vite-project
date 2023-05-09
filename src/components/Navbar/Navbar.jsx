@@ -1,5 +1,5 @@
 import React from "react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import "./Navbar.css";
 
@@ -15,7 +15,15 @@ export default function Navbar() {
             BookReserve
           </a>
           {/* me-4 added in navbar-toggler button */}
-          <button className="navbar-toggler me-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <button
+            className="navbar-toggler me-4"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
@@ -41,7 +49,10 @@ export default function Navbar() {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" onClick={() => navigate("/reservation")}>
+                <a
+                  className="nav-link"
+                  onClick={() => navigate("/reservation")}
+                >
                   Reserve
                 </a>
               </li>
