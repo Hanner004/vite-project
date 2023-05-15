@@ -19,7 +19,7 @@ import PageNotFound from './utils/PageNotFound';
 import Footer from './components/Footer/Footer';
 
 function App() {
-  localStorage.setItem('API', 'http://localhost:4444/api/v1/book-reserve');
+  localStorage.setItem('API_VITE', import.meta.env.VITE_API_BACKEND);
   return (
     <BrowserRouter>
       <div className="container">
