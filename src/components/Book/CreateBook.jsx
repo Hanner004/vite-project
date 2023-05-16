@@ -101,7 +101,6 @@ export default function CreateBook() {
                 }}
               />
             </div>
-
             <div className="mb-3">
               <label className="form-label">Cantidad MAX</label>
               <input
@@ -114,7 +113,6 @@ export default function CreateBook() {
                 }}
               />
             </div>
-
             <div className="mb-3">
               <label className="form-label">Ubicación en la biblioteca</label>
               <input
@@ -128,14 +126,12 @@ export default function CreateBook() {
               />
             </div>
             <div className="mb-3">
-              <label className="form-label">Editorial del libro</label>
               <EditorialDropdown
                 editorials={editorials}
                 editorialOptionClick={(option) => editorialOptionClick(option)}
               />
             </div>
             <div className="mb-3">
-              <label className="form-label">Autor del libro</label>
               <AuthorDropdown
                 authors={authors}
                 authorOptionClick={(option) => authorOptionClick(option)}
@@ -161,10 +157,10 @@ export default function CreateBook() {
   );
 
   async function editorialOptionClick(option) {
-    setEditorialOption(option);
+    setEditorialOption(option.value);
   }
 
   async function authorOptionClick(option) {
-    setAuthorOption(option);
+    setAuthorOption(option.value);
   }
 }
