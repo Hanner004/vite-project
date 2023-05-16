@@ -44,7 +44,7 @@ export default function CreateEditorial() {
 
   return (
     <div className="row">
-      <div className="col">
+      <div className="col mb-4">
         <form onSubmit={handleSubmit} className="border rounded">
           <div className="form-title p-3 border-bottom">
             <h3 className="m-0">Agregar editorial</h3>

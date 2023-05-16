@@ -83,13 +83,12 @@ export default function CreateBook() {
 
   return (
     <div className="row">
-      <div className="col">
+      <div className="col mb-4">
         <form onSubmit={handleSubmit} className="border rounded">
           <div className="form-title p-3 border-bottom">
             <h3 className="m-0">Agregar libro</h3>
           </div>
           <div className="form-body border-bottom p-3">
-            {/* form */}
             <div className="mb-3">
               <label className="form-label">Nombre del libro</label>
               <input
@@ -128,51 +127,20 @@ export default function CreateBook() {
                 }}
               />
             </div>
-
-            {/* start-editorial-dropdown */}
-            <div className="row mb-3">
-              <div className="col-md-4">
-                <EditorialDropdown
-                  editorials={editorials}
-                  editorialOptionClick={(option) =>
-                    editorialOptionClick(option)
-                  }
-                />
-              </div>
-              <div className="col-md-8">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Editorial"
-                  required
-                  disabled
-                  value={editorialOption.editorial_name || ''}
-                />
-              </div>
+            <div className="mb-3">
+              <label className="form-label">Editorial del libro</label>
+              <EditorialDropdown
+                editorials={editorials}
+                editorialOptionClick={(option) => editorialOptionClick(option)}
+              />
             </div>
-            {/* end-editorial-dropdown */}
-
-            {/* start-author-dropdown */}
-            <div className="row mb-3">
-              <div className="col-md-4">
-                <AuthorDropdown
-                  authors={authors}
-                  authorOptionClick={(option) => authorOptionClick(option)}
-                />
-              </div>
-              <div className="col-md-8">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Autor"
-                  required
-                  disabled
-                  value={authorOption.author_name || ''}
-                />
-              </div>
+            <div className="mb-3">
+              <label className="form-label">Autor del libro</label>
+              <AuthorDropdown
+                authors={authors}
+                authorOptionClick={(option) => authorOptionClick(option)}
+              />
             </div>
-            {/* end-author-dropdown */}
-            {/* end-form */}
           </div>
           <div className="form-footer p-3">
             <button type="submit" className="btn btn-primary mr-2">

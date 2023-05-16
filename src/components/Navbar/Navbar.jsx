@@ -12,7 +12,7 @@ export default function Navbar() {
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           {/* ms-4 added in BookReverse <a> */}
           <a className="navbar-brand ms-4" onClick={() => navigate('/')}>
-            BookReserve
+            <img src="/logo_preview.svg" height="100" />
           </a>
           {/* me-4 added in navbar-toggler button */}
           <button

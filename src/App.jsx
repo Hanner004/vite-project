@@ -19,7 +19,6 @@ import PageNotFound from './utils/PageNotFound';
 import Footer from './components/Footer/Footer';
 
 function App() {
-  localStorage.setItem('API_VITE', import.meta.env.VITE_API_BACKEND);
   return (
     <BrowserRouter>
       <div className="container">

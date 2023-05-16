@@ -60,7 +60,7 @@ export default function UpdateEditorial() {
 
   return (
     <div className="row">
-      <div className="col">
+      <div className="col mb-4">
         <form onSubmit={handleUpdate} className="border rounded">
           <div className="form-title p-3 border-bottom">
             <h3 className="m-0">Actualizar editorial #{`${editorialId}`}</h3>
