@@ -1,12 +1,12 @@
 ## Installation
 
 ```bash
-$ npm install
+npm install
 ```
 
 ## Running the app
 
 ```bash
 # development
-$ npm run dev
+npm run dev
 ```
