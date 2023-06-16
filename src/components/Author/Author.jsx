@@ -39,7 +39,9 @@ export default function Author() {
               <div className="card-body">
                 <h5 className="card-title">#{item.author_id}</h5>
                 <p className="card-text">
-                  {item.author_name} {item.author_lastname}
+                  <small>
+                    {item.author_name} {item.author_lastname}
+                  </small>
                 </p>
                 <Link
                   to={`/author/update/${item.author_id}`}

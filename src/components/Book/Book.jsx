@@ -41,8 +41,17 @@ export default function Book() {
                   #{item.book_id} - {item.book_name}
                 </h5>
                 <p className="card-text">
-                  {item.book_library_location} - MAX:{' '}
-                  {item.book_available_quantity}
+                  <small>
+                    Ubicación: {item.book_library_location}
+                    <br />
+                    Cantidad disponible:{' '}
+                    {item.book_available_quantity -
+                      item.book_current_amount_occupied}
+                    <br />
+                    Autor: {item.author_name} {item.author_lastname}
+                    <br />
+                    Editorial: {item.editorial_name}
+                  </small>
                 </p>
                 <Link
                   to={`/book/update/${item.book_id}`}
