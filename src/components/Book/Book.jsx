@@ -82,7 +82,7 @@ export default function Book() {
       showCancelButton: true,
       cancelButtonText: 'Cancelar',
       confirmButtonText: 'Aceptar',
-      confirmButtonColor: '#20515C',
+      confirmButtonColor: '#dc3545',
       reverseButtons: true,
     }).then(async (result) => {
       if (result.isConfirmed) {
