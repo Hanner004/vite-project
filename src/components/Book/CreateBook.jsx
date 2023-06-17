@@ -72,6 +72,7 @@ export default function CreateBook() {
             icon: 'error',
             title: response.statusText,
             text: data.message[0],
+            confirmButtonColor: 'Gray',
           });
         });
     }
