@@ -7,20 +7,41 @@ import { booksAPI } from '../../utils/routesFormat';
 export default function HomeBook() {
   const [error, setError] = useState(null);
   const [books, setBooks] = useState([]);
-
-  async function getBooks() {
-    await axios
-      .get(booksAPI)
-      .then(({ data }) => setBooks(data))
-      .catch(({ message }) => setError(message));
-  }
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    getBooks();
+    const delayDebounceFn = setTimeout(() => {
+      searchAPI();
+    }, 500);
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchTerm]);
+
+  useEffect(() => {
+    searchAPI();
   }, []);
+
+  const searchAPI = async () => {
+    await axios
+      .get(booksAPI + `?query_string=${searchTerm}`)
+      .then(({ data }) => setBooks(data))
+      .catch(({ message }) => setError(message));
+  };
 
   return (
     <>
+      <div className="row">
+        <div className="col-12 mb-4">
+          <input
+            type="text"
+            className="form-control"
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+            }}
+            placeholder="Consultar libro por nombre, autor o editorial"
+          />
+        </div>
+      </div>
       <div className="row">
         {error && <Error message={error} />}
         {books.length === 0 && <InfoNotFound />}
