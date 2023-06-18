@@ -6,6 +6,7 @@ import { authorAPI } from '../../utils/routesFormat';
 
 export default function CreateAuthor() {
   const navigate = useNavigate();
+
   const [authorName, setAuthorName] = useState('');
   const [authorLastname, setAuthorLastname] = useState('');
 
@@ -34,6 +35,7 @@ export default function CreateAuthor() {
           icon: 'error',
           title: response.statusText,
           text: data.message[0],
+          confirmButtonColor: 'Gray',
         });
       });
   }

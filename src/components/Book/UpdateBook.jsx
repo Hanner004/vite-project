@@ -30,7 +30,7 @@ export default function UpdateBook() {
   const [defaultEditorial, setDefaultEditorial] = useState({});
   const [defaultAuthor, setDefaultAuthor] = useState({});
 
-  //selected-option
+  //select-option
   const [editorialOption, setEditorialOption] = useState({});
   const [authorOption, setAuthorOption] = useState({});
 
@@ -84,6 +84,7 @@ export default function UpdateBook() {
         icon: 'error',
         title: 'Oops...',
         text: 'El autor y editorial son requeridos',
+        confirmButtonColor: 'Gray',
       });
     } else {
       await axios

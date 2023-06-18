@@ -29,9 +29,10 @@ export default function CreateBook() {
     getAuthors();
   }, []);
 
+  const navigate = useNavigate();
+  //select-option
   const [editorialOption, setEditorialOption] = useState({});
   const [authorOption, setAuthorOption] = useState({});
-  const navigate = useNavigate();
   //book-state
   const [bookName, setBookName] = useState('');
   const [bookAvailableQuantity, setBookAvailableQuantity] = useState(null);
@@ -44,6 +45,7 @@ export default function CreateBook() {
         icon: 'error',
         title: 'Oops...',
         text: 'El autor y editorial son requeridos',
+        confirmButtonColor: 'Gray',
       });
     } else {
       await axios

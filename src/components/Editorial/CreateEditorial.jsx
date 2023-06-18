@@ -6,6 +6,7 @@ import { editorialAPI } from '../../utils/routesFormat';
 
 export default function CreateEditorial() {
   const navigate = useNavigate();
+
   const [editorialName, setEditorialName] = useState('');
   const [editorialDescription, setEditorialDescription] = useState('');
 
@@ -34,6 +35,7 @@ export default function CreateEditorial() {
           icon: 'error',
           title: response.statusText,
           text: data.message[0],
+          confirmButtonColor: 'Gray',
         });
       });
   }

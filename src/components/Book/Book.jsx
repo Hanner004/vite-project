@@ -42,15 +42,17 @@ export default function Book() {
                 </h5>
                 <p className="card-text">
                   <small>
-                    Ubicación: {item.book_library_location}
+                    Cantidad MAX establecida: {item.book_available_quantity}
                     <br />
                     Cantidad disponible:{' '}
                     {item.book_available_quantity -
                       item.book_current_amount_occupied}
                     <br />
-                    Autor: {item.author_name} {item.author_lastname}
+                    Ubicación: {item.book_library_location}
                     <br />
                     Editorial: {item.editorial_name}
+                    <br />
+                    Autor: {item.author_name} {item.author_lastname}
                   </small>
                 </p>
                 <Link
