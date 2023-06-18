@@ -16,7 +16,7 @@ export default function Home() {
         </div>
       </div>
       <div className="row">
-        <div className="col mb-4">
+        <div className="col">
           <HomeBook />
         </div>
       </div>
