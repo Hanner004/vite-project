@@ -1,0 +1,10 @@
+.home-custom-btn {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}
+
+.home-custom-btn:hover {
+  background-color: black;
+  color: white;
+}
