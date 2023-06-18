@@ -12,7 +12,7 @@ export default function Home() {
       </div>
       <div className="row">
         <div className="col mb-4">
-          <h3 className="text-center">Libros disponibles</h3>
+          <h3 className="text-center m-0 p-0">Libros disponibles</h3>
         </div>
       </div>
       <div className="row">
