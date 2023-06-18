@@ -1,7 +1,6 @@
 import React from 'react';
 import Carousel_Home from '../Carousel-Home/Carousel-Home';
-import { Link } from 'react-router-dom';
-import './styles.css';
+import HomeBook from './Home-Book';
 
 export default function Home() {
   return (
@@ -17,13 +16,8 @@ export default function Home() {
         </div>
       </div>
       <div className="row">
-        <div className="col mb-4"></div>
-      </div>
-      <div className="row">
-        <div className="col mb-4 d-flex justify-content-center align-items-center">
-          <Link to="/library" className="btn home-custom-btn">
-            Consultar más
-          </Link>
+        <div className="col mb-4">
+          <HomeBook />
         </div>
       </div>
     </>
