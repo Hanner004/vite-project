@@ -4,6 +4,8 @@ import Error from '../../utils/Error';
 import InfoNotFound from '../../utils/InfoNotFound';
 import { booksAPI } from '../../utils/routesFormat';
 
+import Toolbar from '../Toolbar/Toolbar';
+
 export default function HomeBook() {
   const [error, setError] = useState(null);
   const [books, setBooks] = useState([]);
@@ -29,19 +31,12 @@ export default function HomeBook() {
 
   return (
     <>
-      <div className="row">
-        <div className="col-12 mb-4">
-          <input
-            type="text"
-            className="form-control"
-            value={searchTerm}
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-            }}
-            placeholder="Consultar libro por nombre, autor o editorial"
-          />
-        </div>
-      </div>
+      <Toolbar
+        showBtn={false}
+        searchTerm={searchTerm}
+        setSearchTerm={(i) => setSearchTerm(i)}
+        placeholder={'Consultar libro por nombre, autor o editorial'}
+      />
       <div className="row">
         {error && <Error message={error} />}
         {books.length === 0 && <InfoNotFound />}
