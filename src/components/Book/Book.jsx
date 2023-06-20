@@ -42,7 +42,7 @@ export default function Book() {
                 </h5>
                 <p className="card-text">
                   <small>
-                    Cantidad MAX establecida: {item.book_available_quantity}
+                    Cantidad MAX: {item.book_available_quantity}
                     <br />
                     Cantidad disponible:{' '}
                     {item.book_available_quantity -
