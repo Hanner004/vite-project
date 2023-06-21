@@ -13,16 +13,16 @@ export default function HomeBook() {
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      searchAPI();
+      getBooks();
     }, 500);
     return () => clearTimeout(delayDebounceFn);
   }, [searchTerm]);
 
   useEffect(() => {
-    searchAPI();
+    getBooks();
   }, []);
 
-  const searchAPI = async () => {
+  const getBooks = async () => {
     await axios
       .get(booksAPI + `?query_string=${searchTerm}`)
       .then(({ data }) => setBooks(data))

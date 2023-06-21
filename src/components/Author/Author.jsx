@@ -10,21 +10,35 @@ import { authorAPI } from '../../utils/routesFormat';
 export default function Author() {
   const [error, setError] = useState(null);
   const [authors, setAuthors] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
-  async function getAuthors() {
-    await axios
-      .get(authorAPI)
-      .then(({ data }) => setAuthors(data))
-      .catch(({ message }) => setError(message));
-  }
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      getAuthors();
+    }, 500);
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchTerm]);
 
   useEffect(() => {
     getAuthors();
   }, []);
 
+  async function getAuthors() {
+    await axios
+      .get(authorAPI + `?query_string=${searchTerm}`)
+      .then(({ data }) => setAuthors(data))
+      .catch(({ message }) => setError(message));
+  }
+
   return (
     <>
-      <Toolbar toPath={'/author/create'} />
+      <Toolbar
+        showBtn={true}
+        toPath={'/author/create'}
+        searchTerm={searchTerm}
+        setSearchTerm={(i) => setSearchTerm(i)}
+        placeholder={'Consultar autor por nombre'}
+      />
       {error && <Error message={error} />}
       {authors.length === 0 && <InfoNotFound />}
       <div className="row">

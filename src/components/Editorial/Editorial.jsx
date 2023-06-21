@@ -10,10 +10,22 @@ import { editorialAPI } from '../../utils/routesFormat';
 export default function Editorial() {
   const [error, setError] = useState(null);
   const [editorials, setEditorials] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      getEditorials();
+    }, 500);
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchTerm]);
+
+  useEffect(() => {
+    getEditorials();
+  }, []);
 
   async function getEditorials() {
     await axios
-      .get(editorialAPI)
+      .get(editorialAPI + `?query_string=${searchTerm}`)
       .then(({ data }) => setEditorials(data))
       .catch(({ message }) => setError(message));
   }
@@ -24,7 +36,13 @@ export default function Editorial() {
 
   return (
     <>
-      <Toolbar toPath={'/editorial/create'} />
+      <Toolbar
+        showBtn={true}
+        toPath={'/editorial/create'}
+        searchTerm={searchTerm}
+        setSearchTerm={(i) => setSearchTerm(i)}
+        placeholder={'Consultar editorial por nombre'}
+      />
       {error && <Error message={error} />}
       {editorials.length === 0 && <InfoNotFound />}
       <div className="row">

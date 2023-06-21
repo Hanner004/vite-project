@@ -10,21 +10,35 @@ import { booksAPI } from '../../utils/routesFormat';
 export default function Book() {
   const [error, setError] = useState(null);
   const [books, setBooks] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
-  async function getBooks() {
-    await axios
-      .get(booksAPI)
-      .then(({ data }) => setBooks(data))
-      .catch(({ message }) => setError(message));
-  }
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      getBooks();
+    }, 500);
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchTerm]);
 
   useEffect(() => {
     getBooks();
   }, []);
 
+  async function getBooks() {
+    await axios
+      .get(booksAPI + `?query_string=${searchTerm}`)
+      .then(({ data }) => setBooks(data))
+      .catch(({ message }) => setError(message));
+  }
+
   return (
     <>
-      <Toolbar toPath={'/book/create'} />
+      <Toolbar
+        showBtn={true}
+        toPath={'/book/create'}
+        searchTerm={searchTerm}
+        setSearchTerm={(i) => setSearchTerm(i)}
+        placeholder={'Consultar libro por nombre, autor o editorial'}
+      />
       {error && <Error message={error} />}
       {books.length === 0 && <InfoNotFound />}
       <div className="row">
