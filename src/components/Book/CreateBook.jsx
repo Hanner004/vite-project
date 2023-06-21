@@ -69,8 +69,20 @@ export default function CreateBook() {
           navigate('/book');
         })
         .catch(({ response }) => {
-          const { data } = response;
-          Swal.fire({
+          const { data, status } = response;
+          console.log(response.status);
+          console.log(data.message);
+          if (status === 409) {
+            if (data.message === 'the book name is registered') {
+              return Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'El nombre del libro se encuentra registrado en el sistema',
+                confirmButtonColor: 'Gray',
+              });
+            }
+          }
+          return Swal.fire({
             icon: 'error',
             title: response.statusText,
             text: data.message[0],
