@@ -5,8 +5,8 @@ import './Carousel-Home.css';
 
 export default function Carousel_Home() {
   return (
-    <div className="row">
-      <div className="col mb-4">
+    <div className="row mb-4">
+      <div className="col">
         <Carousel>
           <Carousel.Item>
             <div className="carousel-item-content">
