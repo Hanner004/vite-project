@@ -37,9 +37,9 @@ export default function HomeBook() {
         setSearchTerm={(i) => setSearchTerm(i)}
         placeholder={'Consultar libro por nombre, autor o editorial'}
       />
+      {error && <Error message={error} />}
+      {books.length === 0 && <InfoNotFound />}
       <div className="row">
-        {error && <Error message={error} />}
-        {books.length === 0 && <InfoNotFound />}
         {books?.map((item) => (
           <div className="col-md-3 mb-4" key={item.book_id}>
             <div className="card">
