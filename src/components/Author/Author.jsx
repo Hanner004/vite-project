@@ -25,9 +25,9 @@ export default function Author() {
   return (
     <>
       <Toolbar toPath={'/author/create'} />
+      {error && <Error message={error} />}
+      {authors.length === 0 && <InfoNotFound />}
       <div className="row">
-        {error && <Error message={error} />}
-        {authors.length === 0 && <InfoNotFound />}
         {authors?.map((item) => (
           <div className="col-md-3 mb-4" key={item.author_id}>
             <div className="card">
