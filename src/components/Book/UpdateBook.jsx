@@ -39,6 +39,7 @@ export default function UpdateBook() {
   const [bookName, setBookName] = useState('');
   const [bookAvailableQuantity, setBookAvailableQuantity] = useState(null);
   const [bookLibraryLocation, setBookLibraryLocation] = useState('');
+  const [bookISBN, setBookISBN] = useState('');
 
   async function getBookById() {
     await axios
@@ -47,6 +48,7 @@ export default function UpdateBook() {
         setBookName(data.book_name);
         setBookAvailableQuantity(data.book_available_quantity);
         setBookLibraryLocation(data.book_library_location);
+        setBookISBN(data.book_isbn_code);
         const Editorial = {
           editorial_id: data.editorial_id,
           editorial_name: data.editorial_name,
@@ -92,6 +94,7 @@ export default function UpdateBook() {
           name: bookName,
           available_quantity: Number(bookAvailableQuantity),
           library_location: bookLibraryLocation,
+          isbn_code: bookISBN,
           authorId: authorOption.author_id,
           editorialId: editorialOption.editorial_id,
         })
@@ -183,6 +186,19 @@ export default function UpdateBook() {
                 required
                 onChange={(e) => {
                   setBookLibraryLocation(e.target.value);
+                }}
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">ISBN</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="ISBN"
+                value={bookISBN || ''}
+                required
+                onChange={(e) => {
+                  setBookISBN(e.target.value);
                 }}
               />
             </div>

@@ -62,6 +62,8 @@ export default function HomeBook() {
                     <br />
                     Ubicación: {item.book_library_location}
                     <br />
+                    ISBN: {item.book_isbn_code}
+                    <br />
                     Editorial: {item.editorial_name}
                     <br />
                     Autor: {item.author_name} {item.author_lastname}

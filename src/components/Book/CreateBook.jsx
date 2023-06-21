@@ -37,6 +37,7 @@ export default function CreateBook() {
   const [bookName, setBookName] = useState('');
   const [bookAvailableQuantity, setBookAvailableQuantity] = useState(null);
   const [bookLibraryLocation, setBookLibraryLocation] = useState('');
+  const [bookISBN, setBookISBN] = useState('');
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -53,6 +54,7 @@ export default function CreateBook() {
           name: bookName,
           available_quantity: Number(bookAvailableQuantity),
           library_location: bookLibraryLocation,
+          isbn_code: bookISBN,
           authorId: authorOption.author_id,
           editorialId: editorialOption.editorial_id,
         })
@@ -140,6 +142,18 @@ export default function CreateBook() {
                 required
                 onChange={(e) => {
                   setBookLibraryLocation(e.target.value);
+                }}
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">ISBN</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="ISBN"
+                required
+                onChange={(e) => {
+                  setBookISBN(e.target.value);
                 }}
               />
             </div>
