@@ -40,7 +40,7 @@ export default function Client() {
         placeholder={'Consultar cliente'}
       />
       <div className="table-responsive mb-2">
-        <table className="table table-bordered table-sm">
+        <table className="table table-sm table-bordered">
           <thead className="table-dark">
             <tr>
               <th scope="col">#</th>
@@ -49,18 +49,29 @@ export default function Client() {
               <th scope="col">Apellido</th>
               <th scope="col">Correo</th>
               <th scope="col">Teléfono</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
             </tr>
           </thead>
-
           <tbody>
             {clients?.map((item) => (
-              <tr key={item.client_id}>
+              <tr key={item.client_id} className="align-middle">
                 <th scope="row">{item.client_id}</th>
                 <td>{item.client_dni}</td>
                 <td>{item.client_name}</td>
                 <td>{item.client_lastname}</td>
                 <td>{item.client_email}</td>
                 <td>{item.client_phone}</td>
+                <td>
+                  <Link to={`/client/update/${item.client_id}`} className="btn btn-warning">
+                    <i className="fa-solid fa-edit"></i>
+                  </Link>
+                </td>
+                <td>
+                  <button className="btn btn-danger" onClick={() => deleteClient(item.client_id)}>
+                    <i className="fa-solid fa-trash"></i>
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -83,20 +94,18 @@ export default function Client() {
       reverseButtons: true,
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await axios
-          .delete(clientAPI + `/${client_id}`)
-          .then(({ data, statusText }) => {
-            console.log(statusText);
-            console.log(data);
-            Swal.fire({
-              icon: 'success',
-              title: `Cliente #${client_id} eliminado`,
-              text: `Cliente eliminado correctamente.`,
-              showConfirmButton: false,
-              timer: 2000,
-            });
-            getClients();
+        await axios.delete(clientAPI + `/${client_id}`).then(({ data, statusText }) => {
+          console.log(statusText);
+          console.log(data);
+          Swal.fire({
+            icon: 'success',
+            title: `Cliente #${client_id} eliminado`,
+            text: `Cliente eliminado correctamente.`,
+            showConfirmButton: false,
+            timer: 2000,
           });
+          getClients();
+        });
       }
     });
   }

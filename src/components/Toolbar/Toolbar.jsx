@@ -1,13 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Toolbar({
-  showBtn,
-  toPath,
-  searchTerm,
-  setSearchTerm,
-  placeholder,
-}) {
+export default function Toolbar({ showBtn, toPath, searchTerm, setSearchTerm, placeholder }) {
   const handleOnChange = (event) => {
     setSearchTerm(event.target.value);
   };

@@ -43,8 +43,8 @@ function App() {
           <Route path="/book/update/:bookId" element={<UpdateBook />}></Route>
 
           <Route path="/client" element={<Client />}></Route>
-          {/* <Route path="/client/create" element={<CreateClient />}></Route>
-          <Route path="/client/update/:clientId" element={<UpdateClient />}></Route> */}
+          <Route path="/client/create" element={<CreateClient />}></Route>
+          <Route path="/client/update/:clientId" element={<UpdateClient />}></Route>
 
           <Route path="*" element={<PageNotFound />}></Route>
         </Routes>
