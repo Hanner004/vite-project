@@ -15,6 +15,10 @@ import Book from './components/Book/Book';
 import CreateBook from './components/Book/CreateBook';
 import UpdateBook from './components/Book/UpdateBook';
 
+import Client from './components/Client/Client';
+import CreateClient from './components/Client/CreateClient';
+import UpdateClient from './components/Client/UpdateClient';
+
 import PageNotFound from './utils/PageNotFound';
 import Footer from './components/Footer/Footer';
 
@@ -37,6 +41,10 @@ function App() {
           <Route path="/book" element={<Book />}></Route>
           <Route path="/book/create" element={<CreateBook />}></Route>
           <Route path="/book/update/:bookId" element={<UpdateBook />}></Route>
+
+          <Route path="/client" element={<Client />}></Route>
+          {/* <Route path="/client/create" element={<CreateClient />}></Route>
+          <Route path="/client/update/:clientId" element={<UpdateClient />}></Route> */}
 
           <Route path="*" element={<PageNotFound />}></Route>
         </Routes>

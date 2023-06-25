@@ -49,11 +49,13 @@ export default function Navbar() {
                 </a>
               </li>
               <li className="nav-item">
-                <a
-                  className="nav-link"
-                  onClick={() => navigate('/reservation')}
-                >
+                <a className="nav-link" onClick={() => navigate('/reservation')}>
                   Reserve
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" onClick={() => navigate('/client')}>
+                  Clientes
                 </a>
               </li>
             </ul>
