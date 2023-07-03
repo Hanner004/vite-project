@@ -6,6 +6,11 @@ import Toolbar from '../Toolbar/Toolbar';
 import Error from '../../utils/Error';
 import InfoNotFound from '../../utils/InfoNotFound';
 import { reservationAPI } from '../../utils/routesFormat';
+import { ReservationStatusEnum } from '../../utils/enums/reservation.enum';
+
+import dayjs from 'dayjs';
+import 'dayjs/locale/es';
+dayjs.locale('es');
 
 export default function Reservation() {
   const [error, setError] = useState(null);
@@ -25,18 +30,9 @@ export default function Reservation() {
 
   async function getReservations() {
     await axios
-      // .get(reservationAPI + `?query_string=${searchTerm}`)
-      .get(reservationAPI)
+      .get(reservationAPI + `?query_string=${searchTerm}`)
       .then(({ data }) => setReservations(data))
       .catch(({ message }) => setError(message));
-  }
-
-  function getStatus(boolean) {
-    if (boolean) {
-      return 'Ocupado';
-    } else {
-      return 'Disponible';
-    }
   }
 
   return (
@@ -53,8 +49,12 @@ export default function Reservation() {
           <thead className="table-dark">
             <tr>
               <th scope="col">#</th>
+              <th scope="col">Cliente</th>
+              <th scope="col">DNI</th>
+              <th scope="col">Correo</th>
+              <th scope="col">Teléfono</th>
               <th scope="col">Estado</th>
-              <th scope="col"></th>
+              <th scope="col">Fecha</th>
               <th scope="col"></th>
             </tr>
           </thead>
@@ -62,20 +62,21 @@ export default function Reservation() {
             {reservations?.map((item) => (
               <tr key={item.reservation_id} className="align-middle">
                 <th scope="row">{item.reservation_id}</th>
-                <td>{getStatus(item.reservation_is_busy)}</td>
+                <td>{item.client_name + ' ' + item.client_lastname}</td>
+                <td>{item.client_dni}</td>
+                <td>{item.client_email}</td>
+                <td>{item.client_phone}</td>
+                <td className={textColorByStatus(item.reservation_status)}>{item.reservation_status}</td>
                 <td>
-                  <Link
-                    to={`/reservation/update/${item.reservation_id}`}
-                    className="btn btn-warning"
-                  >
-                    <i className="fa-solid fa-edit"></i>
-                  </Link>
+                  {formatDateByStatus(
+                    item.reservation_status,
+                    item.reservation_created_at,
+                    item.reservation_finalized_at,
+                    item.reservation_deleted_at,
+                  )}
                 </td>
                 <td>
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => deleteReservation(item.reservation_id)}
-                  >
+                  <button className="btn btn-danger" onClick={() => deleteReservation(item.reservation_id)}>
                     <i className="fa-solid fa-trash"></i>
                   </button>
                 </td>
@@ -115,5 +116,41 @@ export default function Reservation() {
         });
       }
     });
+  }
+
+  function formatDateByStatus(
+    status,
+    reservation_created_at,
+    reservation_finalized_at,
+    reservation_deleted_at,
+  ) {
+    switch (status) {
+      case ReservationStatusEnum.ACTIVE:
+        return `Activo desde: ${dayjs(reservation_created_at)
+          .subtract(5, 'hours')
+          .format('dddd, DD/MMMM/YYYY, h:mm:ss A')
+          .toUpperCase()}`;
+      case ReservationStatusEnum.FINALIZED:
+        return `Finalizado desde: ${dayjs(reservation_finalized_at)
+          // .subtract(5, 'hours')
+          .format('dddd, DD/MMMM/YYYY, h:mm:ss A')
+          .toUpperCase()}`;
+      case ReservationStatusEnum.DELETED:
+        return `Eliminado desde: ${dayjs(reservation_deleted_at)
+          // .subtract(5, 'hours')
+          .format('dddd, DD/MMMM/YYYY, h:mm:ss A')
+          .toUpperCase()}`;
+    }
+  }
+
+  function textColorByStatus(status) {
+    switch (status) {
+      case ReservationStatusEnum.ACTIVE:
+        return `text-success`;
+      case ReservationStatusEnum.FINALIZED:
+        return `text-secondary`;
+      case ReservationStatusEnum.DELETED:
+        return `text-danger`;
+    }
   }
 }

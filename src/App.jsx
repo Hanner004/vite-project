@@ -21,8 +21,8 @@ import CreateClient from './components/Client/CreateClient';
 import UpdateClient from './components/Client/UpdateClient';
 
 import Reservation from './components/Reservation/Reservation';
-// import CreateReservation from './components/Reservation/CreateReservation';
-// import UpdateReservation from './components/Reservation/UpdateReservation';
+import CreateReservation from './components/Reservation/CreateReservation';
+import UpdateReservation from './components/Reservation/UpdateReservation';
 
 import PageNotFound from './utils/PageNotFound';
 import Footer from './components/Footer/Footer';
