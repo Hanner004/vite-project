@@ -1,11 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 
-export default function AuthorDropdown({
-  authors,
-  authorOptionClick,
-  defaultValue,
-}) {
+export default function AuthorDropdown({ authors, authorOptionClick, defaultValue }) {
   const options = authors.map((i) => {
     return {
       value: i,

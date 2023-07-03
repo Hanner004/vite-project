@@ -30,12 +30,12 @@ export default function Navbar() {
             <ul className="navbar-nav">
               <li className="nav-item">
                 <a className="nav-link" onClick={() => navigate('/')}>
-                  Home
+                  Inicio
                 </a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" onClick={() => navigate('/editorial')}>
-                  Editorial
+                  Editoriales
                 </a>
               </li>
               <li className="nav-item">
@@ -50,12 +50,19 @@ export default function Navbar() {
               </li>
               <li className="nav-item">
                 <a className="nav-link" onClick={() => navigate('/reservation')}>
-                  Reserve
+                  Reservaciones
                 </a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" onClick={() => navigate('/client')}>
                   Clientes
+                </a>
+              </li>
+            </ul>
+            <ul className="nav navbar-nav mx-auto navbar-right">
+              <li className="nav-item">
+                <a className="nav-link" onClick={() => navigate('/login')}>
+                  Iniciar sesión
                 </a>
               </li>
             </ul>

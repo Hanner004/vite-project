@@ -43,11 +43,7 @@ export default function HomeBook() {
         {books?.map((item) => (
           <div className="col-md-3 mb-4" key={item.book_id}>
             <div className="card">
-              <img
-                src="/book.jpg"
-                className="card-img-top"
-                alt={item.book_name}
-              />
+              <img src="/book.jpg" className="card-img-top" alt={item.book_name} />
               <div className="card-body">
                 <h5 className="card-title">
                   #{item.book_id} - {item.book_name}
@@ -57,8 +53,7 @@ export default function HomeBook() {
                     Cantidad MAX: {item.book_available_quantity}
                     <br />
                     Cantidad disponible:{' '}
-                    {item.book_available_quantity -
-                      item.book_current_amount_occupied}
+                    {item.book_available_quantity - item.book_current_amount_occupied}
                     <br />
                     Ubicación: {item.book_library_location}
                     <br />

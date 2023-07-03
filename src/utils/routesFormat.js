@@ -6,3 +6,4 @@ export const editorialAPI = `${API}/editorials`;
 export const authorAPI = `${API}/authors`;
 export const booksAPI = `${API}/books`;
 export const clientAPI = `${API}/clients`;
+export const reservationAPI = `${API}/reservations`;

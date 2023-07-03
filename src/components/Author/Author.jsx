@@ -45,11 +45,7 @@ export default function Author() {
         {authors?.map((item) => (
           <div className="col-md-3 mb-4" key={item.author_id}>
             <div className="card">
-              <img
-                src="/author.jpg"
-                className="card-img-top"
-                alt={item.author_name}
-              />
+              <img src="/author.jpg" className="card-img-top" alt={item.author_name} />
               <div className="card-body">
                 <h5 className="card-title">#{item.author_id}</h5>
                 <p className="card-text">
@@ -57,17 +53,11 @@ export default function Author() {
                     {item.author_name} {item.author_lastname}
                   </small>
                 </p>
-                <Link
-                  to={`/author/update/${item.author_id}`}
-                  className="btn btn-warning"
-                >
+                <Link to={`/author/update/${item.author_id}`} className="btn btn-warning">
                   <i className="fa-solid fa-edit"></i>
                 </Link>
                 &nbsp;
-                <button
-                  className="btn btn-danger"
-                  onClick={() => deleteAuthor(item.author_id)}
-                >
+                <button className="btn btn-danger" onClick={() => deleteAuthor(item.author_id)}>
                   <i className="fa-solid fa-trash"></i>
                 </button>
               </div>
@@ -90,20 +80,18 @@ export default function Author() {
       reverseButtons: true,
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await axios
-          .delete(authorAPI + `/${author_id}`)
-          .then(({ data, statusText }) => {
-            console.log(statusText);
-            console.log(data);
-            Swal.fire({
-              icon: 'success',
-              title: `Autor #${author_id} eliminado`,
-              text: `Autor eliminado correctamente.`,
-              showConfirmButton: false,
-              timer: 2000,
-            });
-            getAuthors();
+        await axios.delete(authorAPI + `/${author_id}`).then(({ data, statusText }) => {
+          console.log(statusText);
+          console.log(data);
+          Swal.fire({
+            icon: 'success',
+            title: `Autor #${author_id} eliminado`,
+            text: `Autor eliminado correctamente.`,
+            showConfirmButton: false,
+            timer: 2000,
           });
+          getAuthors();
+        });
       }
     });
   }

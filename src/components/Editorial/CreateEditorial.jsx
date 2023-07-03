@@ -94,11 +94,7 @@ export default function CreateEditorial() {
               Agregar editorial
             </button>
             &nbsp;
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={handleCancel}
-            >
+            <button type="button" className="btn btn-secondary" onClick={handleCancel}>
               Cancel
             </button>
           </div>

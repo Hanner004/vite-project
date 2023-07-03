@@ -2,6 +2,7 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import Home from './components/Home/Home';
+import Login from './components/Login/Login';
 
 import Editorial from './components/Editorial/Editorial';
 import CreateEditorial from './components/Editorial/CreateEditorial';
@@ -19,6 +20,10 @@ import Client from './components/Client/Client';
 import CreateClient from './components/Client/CreateClient';
 import UpdateClient from './components/Client/UpdateClient';
 
+import Reservation from './components/Reservation/Reservation';
+// import CreateReservation from './components/Reservation/CreateReservation';
+// import UpdateReservation from './components/Reservation/UpdateReservation';
+
 import PageNotFound from './utils/PageNotFound';
 import Footer from './components/Footer/Footer';
 
@@ -29,6 +34,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />}></Route>
+          <Route path="/login" element={<Login />}></Route>
 
           <Route path="/editorial" element={<Editorial />}></Route>
           <Route path="/editorial/create" element={<CreateEditorial />}></Route>
@@ -45,6 +51,10 @@ function App() {
           <Route path="/client" element={<Client />}></Route>
           <Route path="/client/create" element={<CreateClient />}></Route>
           <Route path="/client/update/:clientId" element={<UpdateClient />}></Route>
+
+          <Route path="/reservation" element={<Reservation />}></Route>
+          <Route path="/reservation/create" element={<CreateReservation />}></Route>
+          <Route path="/reservation/update/:reservationId" element={<UpdateReservation />}></Route>
 
           <Route path="*" element={<PageNotFound />}></Route>
         </Routes>

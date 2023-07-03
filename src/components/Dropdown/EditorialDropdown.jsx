@@ -1,11 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 
-export default function EditorialDropdown({
-  editorials,
-  editorialOptionClick,
-  defaultValue,
-}) {
+export default function EditorialDropdown({ editorials, editorialOptionClick, defaultValue }) {
   const options = editorials.map((i) => {
     return {
       value: i,

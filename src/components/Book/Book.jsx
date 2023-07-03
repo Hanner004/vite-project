@@ -45,11 +45,7 @@ export default function Book() {
         {books?.map((item) => (
           <div className="col-md-3 mb-4" key={item.book_id}>
             <div className="card">
-              <img
-                src="/book.jpg"
-                className="card-img-top"
-                alt={item.book_name}
-              />
+              <img src="/book.jpg" className="card-img-top" alt={item.book_name} />
               <div className="card-body">
                 <h5 className="card-title">
                   #{item.book_id} - {item.book_name}
@@ -59,8 +55,7 @@ export default function Book() {
                     Cantidad MAX: {item.book_available_quantity}
                     <br />
                     Cantidad disponible:{' '}
-                    {item.book_available_quantity -
-                      item.book_current_amount_occupied}
+                    {item.book_available_quantity - item.book_current_amount_occupied}
                     <br />
                     Ubicación: {item.book_library_location}
                     <br />
@@ -71,17 +66,11 @@ export default function Book() {
                     Autor: {item.author_name} {item.author_lastname}
                   </small>
                 </p>
-                <Link
-                  to={`/book/update/${item.book_id}`}
-                  className="btn btn-warning"
-                >
+                <Link to={`/book/update/${item.book_id}`} className="btn btn-warning">
                   <i className="fa-solid fa-edit"></i>
                 </Link>
                 &nbsp;
-                <button
-                  className="btn btn-danger"
-                  onClick={() => deleteBook(item.book_id)}
-                >
+                <button className="btn btn-danger" onClick={() => deleteBook(item.book_id)}>
                   <i className="fa-solid fa-trash"></i>
                 </button>
               </div>
@@ -104,20 +93,18 @@ export default function Book() {
       reverseButtons: true,
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await axios
-          .delete(booksAPI + `/${book_id}`)
-          .then(({ data, statusText }) => {
-            console.log(statusText);
-            console.log(data);
-            Swal.fire({
-              icon: 'success',
-              title: `Libro #${book_id} eliminado`,
-              text: `Libro eliminado correctamente.`,
-              showConfirmButton: false,
-              timer: 2000,
-            });
-            getBooks();
+        await axios.delete(booksAPI + `/${book_id}`).then(({ data, statusText }) => {
+          console.log(statusText);
+          console.log(data);
+          Swal.fire({
+            icon: 'success',
+            title: `Libro #${book_id} eliminado`,
+            text: `Libro eliminado correctamente.`,
+            showConfirmButton: false,
+            timer: 2000,
           });
+          getBooks();
+        });
       }
     });
   }

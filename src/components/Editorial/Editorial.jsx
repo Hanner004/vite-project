@@ -49,11 +49,7 @@ export default function Editorial() {
         {editorials?.map((item) => (
           <div className="col-md-3 mb-4" key={item.editorial_id}>
             <div className="card">
-              <img
-                src="/editorial.jpg"
-                className="card-img-top"
-                alt={item.editorial_name}
-              />
+              <img src="/editorial.jpg" className="card-img-top" alt={item.editorial_name} />
               <div className="card-body">
                 <h5 className="card-title">
                   #{item.editorial_id} - {item.editorial_name}
@@ -61,10 +57,7 @@ export default function Editorial() {
                 <p className="card-text">
                   <small>{item.editorial_description}</small>
                 </p>
-                <Link
-                  to={`/editorial/update/${item.editorial_id}`}
-                  className="btn btn-warning"
-                >
+                <Link to={`/editorial/update/${item.editorial_id}`} className="btn btn-warning">
                   <i className="fa-solid fa-edit"></i>
                 </Link>
                 &nbsp;
@@ -94,20 +87,18 @@ export default function Editorial() {
       reverseButtons: true,
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await axios
-          .delete(editorialAPI + `/${editorial_id}`)
-          .then(({ data, statusText }) => {
-            console.log(statusText);
-            console.log(data);
-            Swal.fire({
-              icon: 'success',
-              title: `Editorial #${editorial_id} eliminado`,
-              text: `Editorial eliminado correctamente.`,
-              showConfirmButton: false,
-              timer: 2000,
-            });
-            getEditorials();
+        await axios.delete(editorialAPI + `/${editorial_id}`).then(({ data, statusText }) => {
+          console.log(statusText);
+          console.log(data);
+          Swal.fire({
+            icon: 'success',
+            title: `Editorial #${editorial_id} eliminado`,
+            text: `Editorial eliminado correctamente.`,
+            showConfirmButton: false,
+            timer: 2000,
           });
+          getEditorials();
+        });
       }
     });
   }

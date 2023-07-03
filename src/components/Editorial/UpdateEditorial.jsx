@@ -111,11 +111,7 @@ export default function UpdateEditorial() {
               Actualizar editorial
             </button>
             &nbsp;
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={handleCancel}
-            >
+            <button type="button" className="btn btn-secondary" onClick={handleCancel}>
               Cancel
             </button>
           </div>

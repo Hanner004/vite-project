@@ -222,11 +222,7 @@ export default function UpdateBook() {
               Actualizar libro
             </button>
             &nbsp;
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={handleCancel}
-            >
+            <button type="button" className="btn btn-secondary" onClick={handleCancel}>
               Cancel
             </button>
           </div>

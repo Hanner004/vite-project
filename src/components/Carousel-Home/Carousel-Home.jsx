@@ -10,11 +10,7 @@ export default function Carousel_Home() {
         <Carousel>
           <Carousel.Item>
             <div className="carousel-item-content">
-              <img
-                className="d-block w-100"
-                src="/carousel-images/slide1.jpg"
-                alt="First slide"
-              />
+              <img className="d-block w-100" src="/carousel-images/slide1.jpg" alt="First slide" />
               <div className="carousel-caption">
                 <h3>Conozca nuestra plataforma de libros</h3>
                 {/* <p>
@@ -26,11 +22,7 @@ export default function Carousel_Home() {
           </Carousel.Item>
           <Carousel.Item>
             <div className="carousel-item-content">
-              <img
-                className="d-block w-100"
-                src="/carousel-images/slide2.jpg"
-                alt="Second slide"
-              />
+              <img className="d-block w-100" src="/carousel-images/slide2.jpg" alt="Second slide" />
               <div className="carousel-caption">
                 <h3>Explora nuestro catálogo de libros</h3>
                 {/* <p>
@@ -43,11 +35,7 @@ export default function Carousel_Home() {
           </Carousel.Item>
           <Carousel.Item>
             <div className="carousel-item-content">
-              <img
-                className="d-block w-100"
-                src="/carousel-images/slide3.jpg"
-                alt="Third slide"
-              />
+              <img className="d-block w-100" src="/carousel-images/slide3.jpg" alt="Third slide" />
               <div className="carousel-caption">
                 <h3>Explora los senderos de la sabiduría literaria</h3>
                 {/* <p>

@@ -111,11 +111,7 @@ export default function UpdateAuthor() {
               Actualizar autor
             </button>
             &nbsp;
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={handleCancel}
-            >
+            <button type="button" className="btn btn-secondary" onClick={handleCancel}>
               Cancel
             </button>
           </div>
