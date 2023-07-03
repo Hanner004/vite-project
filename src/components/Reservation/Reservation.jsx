@@ -2,7 +2,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Toolbar from '../Toolbar/Toolbar';
+import ToolbarReservation from '../Toolbar/Toolbar-Reservation';
 import Error from '../../utils/Error';
 import InfoNotFound from '../../utils/InfoNotFound';
 import { reservationAPI } from '../../utils/routesFormat';
@@ -16,36 +16,43 @@ export default function Reservation() {
   const [error, setError] = useState(null);
   const [reservations, setReservations] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [status, setStatus] = useState(null);
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       getReservations();
     }, 500);
     return () => clearTimeout(delayDebounceFn);
-  }, [searchTerm]);
+  }, [searchTerm, status]);
 
   useEffect(() => {
     getReservations();
   }, []);
 
   async function getReservations() {
+    let params = {};
+    if (status !== null) {
+      params = {
+        status,
+      };
+    }
     await axios
-      .get(reservationAPI + `?query_string=${searchTerm}`)
+      .get(reservationAPI + `?query_string=${searchTerm}`, { params })
       .then(({ data }) => setReservations(data))
       .catch(({ message }) => setError(message));
   }
 
   return (
     <>
-      <Toolbar
-        showBtn={true}
+      <ToolbarReservation
         toPath={'/reservation/create'}
         searchTerm={searchTerm}
         setSearchTerm={(i) => setSearchTerm(i)}
         placeholder={'Consultar reservaciones'}
+        setStatus={setStatus}
       />
       <div className="table-responsive mb-2">
-        <table className="table table-sm table-bordered">
+        <table className="table table-sm">
           <thead className="table-dark">
             <tr>
               <th scope="col">#</th>
@@ -55,6 +62,7 @@ export default function Reservation() {
               <th scope="col">Teléfono</th>
               <th scope="col">Estado</th>
               <th scope="col">Fecha</th>
+              <th scope="col"></th>
               <th scope="col"></th>
             </tr>
           </thead>
@@ -76,7 +84,20 @@ export default function Reservation() {
                   )}
                 </td>
                 <td>
-                  <button className="btn btn-danger" onClick={() => deleteReservation(item.reservation_id)}>
+                  <button
+                    disabled={item.reservation_status !== ReservationStatusEnum.ACTIVE}
+                    className="btn btn-secondary"
+                    onClick={() => finalizeReservation(item.reservation_id)}
+                  >
+                    <i className="fa-solid fa-check-to-slot"></i>
+                  </button>
+                </td>
+                <td>
+                  <button
+                    disabled={item.reservation_status !== ReservationStatusEnum.ACTIVE}
+                    className="btn btn-danger"
+                    onClick={() => deleteReservation(item.reservation_id)}
+                  >
                     <i className="fa-solid fa-trash"></i>
                   </button>
                 </td>
@@ -89,6 +110,34 @@ export default function Reservation() {
       {reservations.length === 0 && <InfoNotFound />}
     </>
   );
+
+  async function finalizeReservation(reservation_id) {
+    Swal.fire({
+      title: '¿Estás seguro de finalizar esta reservación?',
+      text: `Estás a punto de finalizar la reservación con el identificador #${reservation_id}. ¿Estás seguro de que deseas continuar? Esta acción no se puede deshacer. Por favor, asegúrate de que esta sea la acción que deseas tomar antes de proceder.`,
+      icon: 'question',
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Aceptar',
+      confirmButtonColor: 'Green',
+      reverseButtons: true,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await axios.patch(reservationAPI + `/finalize/${reservation_id}`).then(({ data, statusText }) => {
+          console.log(statusText);
+          console.log(data);
+          Swal.fire({
+            icon: 'success',
+            title: `Reservación #${reservation_id} finalizada`,
+            text: `Reservación finalizada correctamente.`,
+            showConfirmButton: false,
+            timer: 2000,
+          });
+          getReservations();
+        });
+      }
+    });
+  }
 
   async function deleteReservation(reservation_id) {
     Swal.fire({
