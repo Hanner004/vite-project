@@ -54,8 +54,9 @@ export default function HomeBook() {
               <img src="/book.jpg" className="card-img-top" alt={item.book_name} />
               <div className="card-body">
                 <h5 className="card-title">
-                  #{item.book_id} - {item.book_name}&nbsp;
-                  {circleBookClass(item.book_available_quantity - item.book_current_amount_occupied)}
+                  #{item.book_id}&nbsp;
+                  {circleBookClass(item.book_available_quantity - item.book_current_amount_occupied)} -&nbsp;
+                  {item.book_name}
                 </h5>
                 <p className="card-text">
                   <small>
