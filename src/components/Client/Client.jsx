@@ -40,7 +40,7 @@ export default function Client() {
         placeholder={'Consultar cliente'}
       />
       <div className="table-responsive mb-2">
-        <table className="table table-sm table-bordered">
+        <table className="table table-sm">
           <thead className="table-dark">
             <tr>
               <th scope="col">#</th>

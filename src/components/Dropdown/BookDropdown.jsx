@@ -1,26 +1,26 @@
 import React from 'react';
 import Select from 'react-select';
 
-export default function EditorialDropdown({
-  editorials,
-  editorialOptionClick,
+export default function BookDropdown({
+  books,
+  bookOptionClick,
   defaultValue,
+  selectValue,
 }) {
-  const options = editorials.map((i) => {
+  const options = books.map((i) => {
     return {
       value: i,
-      label: `#${i.editorial_id} - ${i.editorial_name}`,
+      label: `#${i.book_id} - Nombre del libro: ${i.book_name} - ISBN: ${i.book_isbn_code}`,
     };
   });
   if (defaultValue?.value) {
     return (
       <>
-        <label className="form-label">Editorial del libro</label>
         <Select
           key={defaultValue}
           defaultValue={defaultValue}
           options={options}
-          onChange={editorialOptionClick}
+          onChange={bookOptionClick}
           placeholder="Selecciona una opción"
         />
       </>
@@ -28,11 +28,11 @@ export default function EditorialDropdown({
   } else {
     return (
       <>
-        <label className="form-label">Editorial del libro</label>
         <Select
           options={options}
-          onChange={editorialOptionClick}
+          onChange={bookOptionClick}
           placeholder="Selecciona una opción"
+          value={selectValue}
         />
       </>
     );

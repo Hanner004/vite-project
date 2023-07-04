@@ -1,26 +1,22 @@
 import React from 'react';
 import Select from 'react-select';
 
-export default function EditorialDropdown({
-  editorials,
-  editorialOptionClick,
-  defaultValue,
-}) {
-  const options = editorials.map((i) => {
+export default function ClientDropdown({ clients, clientOptionClick, defaultValue }) {
+  const options = clients.map((i) => {
     return {
       value: i,
-      label: `#${i.editorial_id} - ${i.editorial_name}`,
+      label: `DNI: ${i.client_dni} - ${i.client_name} ${i.client_lastname}`,
     };
   });
   if (defaultValue?.value) {
     return (
       <>
-        <label className="form-label">Editorial del libro</label>
+        <label className="form-label">Cliente de la reserva</label>
         <Select
           key={defaultValue}
           defaultValue={defaultValue}
           options={options}
-          onChange={editorialOptionClick}
+          onChange={clientOptionClick}
           placeholder="Selecciona una opción"
         />
       </>
@@ -28,10 +24,10 @@ export default function EditorialDropdown({
   } else {
     return (
       <>
-        <label className="form-label">Editorial del libro</label>
+        <label className="form-label">Cliente de la reserva</label>
         <Select
           options={options}
-          onChange={editorialOptionClick}
+          onChange={clientOptionClick}
           placeholder="Selecciona una opción"
         />
       </>

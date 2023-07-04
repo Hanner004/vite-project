@@ -8,7 +8,6 @@ export default function AuthorDropdown({ authors, authorOptionClick, defaultValu
       label: `#${i.author_id} - ${i.author_name} ${i.author_lastname}`,
     };
   });
-
   if (defaultValue?.value) {
     return (
       <>
