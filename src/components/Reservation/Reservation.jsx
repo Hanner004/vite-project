@@ -54,7 +54,7 @@ export default function Reservation() {
       <div className="table-responsive mb-2">
         <table className="table table-sm">
           <thead className="table-dark">
-            <tr>
+            <tr className="text-center">
               <th scope="col">#</th>
               <th scope="col">Cliente</th>
               <th scope="col">DNI</th>
@@ -68,13 +68,15 @@ export default function Reservation() {
           </thead>
           <tbody>
             {reservations?.map((item) => (
-              <tr key={item.reservation_id} className="align-middle">
+              <tr key={item.reservation_id} className="align-middle text-center">
                 <th scope="row">{item.reservation_id}</th>
                 <td>{item.client_name + ' ' + item.client_lastname}</td>
                 <td>{item.client_dni}</td>
                 <td>{item.client_email}</td>
                 <td>{item.client_phone}</td>
-                <td className={textColorByStatus(item.reservation_status)}>{item.reservation_status}</td>
+                <td>
+                  <div className={textColorByStatus(item.reservation_status)}>{item.reservation_status}</div>
+                </td>
                 <td>
                   {formatDateByStatus(
                     item.reservation_status,
@@ -177,17 +179,20 @@ export default function Reservation() {
       case ReservationStatusEnum.ACTIVE:
         return `Activo desde: ${dayjs(reservation_created_at)
           .subtract(5, 'hours')
-          .format('dddd, DD/MMMM/YYYY, h:mm:ss A')
+          // .format('dddd, DD/MMMM/YYYY, h:mm:ss A')
+          .format('DD/MMMM/YYYY, h:mm:ss A')
           .toUpperCase()}`;
       case ReservationStatusEnum.FINALIZED:
         return `Finalizado desde: ${dayjs(reservation_finalized_at)
           // .subtract(5, 'hours')
-          .format('dddd, DD/MMMM/YYYY, h:mm:ss A')
+          // .format('dddd, DD/MMMM/YYYY, h:mm:ss A')
+          .format('DD/MMMM/YYYY, h:mm:ss A')
           .toUpperCase()}`;
       case ReservationStatusEnum.DELETED:
         return `Eliminado desde: ${dayjs(reservation_deleted_at)
           // .subtract(5, 'hours')
-          .format('dddd, DD/MMMM/YYYY, h:mm:ss A')
+          // .format('dddd, DD/MMMM/YYYY, h:mm:ss A')
+          .format('DD/MMMM/YYYY, h:mm:ss A')
           .toUpperCase()}`;
     }
   }
@@ -195,11 +200,11 @@ export default function Reservation() {
   function textColorByStatus(status) {
     switch (status) {
       case ReservationStatusEnum.ACTIVE:
-        return `text-success`;
+        return `text-white rounded bg-success p-1`;
       case ReservationStatusEnum.FINALIZED:
-        return `text-secondary`;
+        return `text-white rounded bg-secondary p-1`;
       case ReservationStatusEnum.DELETED:
-        return `text-danger`;
+        return `text-white rounded bg-danger p-1`;
     }
   }
 }

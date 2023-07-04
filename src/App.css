@@ -15,3 +15,20 @@
 .nav-active {
   font-weight: bold;
 }
+
+/* circle-available-books */
+
+.circle-book {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.available-book {
+  background-color: green;
+}
+
+.not-available-book {
+  background-color: red;
+}

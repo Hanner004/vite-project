@@ -42,7 +42,7 @@ export default function Client() {
       <div className="table-responsive mb-2">
         <table className="table table-sm">
           <thead className="table-dark">
-            <tr>
+            <tr className="text-center">
               <th scope="col">#</th>
               <th scope="col">DNI</th>
               <th scope="col">Nombre</th>
@@ -55,7 +55,7 @@ export default function Client() {
           </thead>
           <tbody>
             {clients?.map((item) => (
-              <tr key={item.client_id} className="align-middle">
+              <tr key={item.client_id} className="align-middle text-center">
                 <th scope="row">{item.client_id}</th>
                 <td>{item.client_dni}</td>
                 <td>{item.client_name}</td>

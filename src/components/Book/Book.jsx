@@ -30,6 +30,14 @@ export default function Book() {
       .catch(({ message }) => setError(message));
   }
 
+  function circleBookClass(value) {
+    if (value > 0) {
+      return <span className="circle-book available-book" />;
+    } else {
+      return <span className="circle-book not-available-book" />;
+    }
+  }
+
   return (
     <>
       <Toolbar
@@ -48,13 +56,14 @@ export default function Book() {
               <img src="/book.jpg" className="card-img-top" alt={item.book_name} />
               <div className="card-body">
                 <h5 className="card-title">
-                  #{item.book_id} - {item.book_name}
+                  #{item.book_id} - {item.book_name}&nbsp;
+                  {circleBookClass(item.book_available_quantity - item.book_current_amount_occupied)}
                 </h5>
                 <p className="card-text">
                   <small>
                     Cantidad MAX: {item.book_available_quantity}
                     <br />
-                    Cantidad disponible:{' '}
+                    Cantidad disponible:&nbsp;
                     {item.book_available_quantity - item.book_current_amount_occupied}
                     <br />
                     Ubicación: {item.book_library_location}
