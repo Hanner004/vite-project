@@ -22,7 +22,7 @@ import UpdateClient from './components/Client/UpdateClient';
 
 import Reservation from './components/Reservation/Reservation';
 import CreateReservation from './components/Reservation/CreateReservation';
-import UpdateReservation from './components/Reservation/UpdateReservation';
+import ReservationBook from './components/Reservation/ReservationBook';
 
 import PageNotFound from './utils/PageNotFound';
 import Footer from './components/Footer/Footer';
@@ -54,7 +54,7 @@ function App() {
 
           <Route path="/reservation" element={<Reservation />}></Route>
           <Route path="/reservation/create" element={<CreateReservation />}></Route>
-          <Route path="/reservation/update/:reservationId" element={<UpdateReservation />}></Route>
+          <Route path="/reservation/:reservationId/books" element={<ReservationBook />}></Route>
 
           <Route path="*" element={<PageNotFound />}></Route>
         </Routes>

@@ -64,6 +64,7 @@ export default function Reservation() {
               <th scope="col">Fecha</th>
               <th scope="col"></th>
               <th scope="col"></th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
@@ -84,6 +85,11 @@ export default function Reservation() {
                     item.reservation_finalized_at,
                     item.reservation_deleted_at,
                   )}
+                </td>
+                <td>
+                  <Link to={`/reservation/${item.reservation_id}/books`} className="btn btn-primary">
+                    <i className="fa-solid fa-circle-info"></i>
+                  </Link>
                 </td>
                 <td>
                   <button
@@ -169,12 +175,7 @@ export default function Reservation() {
     });
   }
 
-  function formatDateByStatus(
-    status,
-    reservation_created_at,
-    reservation_finalized_at,
-    reservation_deleted_at,
-  ) {
+  function formatDateByStatus(status, reservation_created_at, reservation_finalized_at, reservation_deleted_at) {
     switch (status) {
       case ReservationStatusEnum.ACTIVE:
         return `Activo desde: ${dayjs(reservation_created_at)
