@@ -55,7 +55,7 @@ export default function ReservationBook() {
         <table className="table table-sm">
           <thead className="table-dark">
             <tr className="text-center">
-              <th colSpan={6} className="p-3">
+              <th colSpan={7} className="p-3">
                 Libros asignados a la reservación
               </th>
             </tr>
@@ -68,6 +68,7 @@ export default function ReservationBook() {
               <th scope="col">ISBN</th>
               <th scope="col">Autor del libro</th>
               <th scope="col">Editorial del libro</th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
@@ -79,6 +80,11 @@ export default function ReservationBook() {
                 <td>{item.book_isbn_code}</td>
                 <td>{item.author_name + ' ' + item.author_lastname}</td>
                 <td>{item.editorial_name}</td>
+                <td>
+                  <button className="btn btn-outline-light" disabled>
+                    <i className="fa-solid fa-trash"></i>
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>

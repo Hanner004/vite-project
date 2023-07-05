@@ -6,6 +6,7 @@ import axios from 'axios';
 import Select from 'react-select';
 import { useNavigate } from 'react-router-dom';
 import ClientDropdown from '../Dropdown/ClientDropdown';
+import InfoNotFound from '../../utils/InfoNotFound';
 
 export default function CreateReservation() {
   const navigate = useNavigate();
@@ -128,6 +129,7 @@ export default function CreateReservation() {
 
   return (
     <>
+
       <div className="row">
         <div className="col mb-4">
           <form onSubmit={handleSubmit} className="border rounded">
@@ -228,6 +230,8 @@ export default function CreateReservation() {
           </tbody>
         </table>
       </div>
+      {selectedItems.length === 0 && <InfoNotFound />}
+      
     </>
   );
 
