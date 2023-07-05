@@ -53,14 +53,11 @@ export default function Author() {
                     {item.author_name} {item.author_lastname}
                   </small>
                 </p>
-                <Link to={`/author/update/${item.author_id}`} className="btn btn-warning">
+                <Link to={`/author/update/${item.author_id}`} className="btn btn-outline-warning">
                   <i className="fa-solid fa-edit"></i>
                 </Link>
                 &nbsp;
-                <button
-                  className="btn btn-danger"
-                  onClick={() => deleteAuthor(item.author_id)}
-                >
+                <button className="btn btn-outline-danger" onClick={() => deleteAuthor(item.author_id)}>
                   <i className="fa-solid fa-trash"></i>
                 </button>
               </div>

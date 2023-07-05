@@ -9,16 +9,10 @@ export default function Toolbar({ showBtn, toPath, searchTerm, setSearchTerm, pl
     return (
       <div className="row mb-4 justify-content-between">
         <div className="col">
-          <input
-            type="text"
-            className="form-control"
-            value={searchTerm}
-            onChange={handleOnChange}
-            placeholder={placeholder}
-          />
+          <input type="text" className="form-control" value={searchTerm} onChange={handleOnChange} placeholder={placeholder} />
         </div>
         <div className="col-auto">
-          <Link to={toPath} className="btn btn-dark">
+          <Link to={toPath} className="btn btn-outline-dark">
             <i className="fa-solid fa-circle-plus"></i> Añadir
           </Link>
         </div>
@@ -28,13 +22,7 @@ export default function Toolbar({ showBtn, toPath, searchTerm, setSearchTerm, pl
     return (
       <div className="row mb-4 justify-content-between">
         <div className="col">
-          <input
-            type="text"
-            className="form-control"
-            value={searchTerm}
-            onChange={handleOnChange}
-            placeholder={placeholder}
-          />
+          <input type="text" className="form-control" value={searchTerm} onChange={handleOnChange} placeholder={placeholder} />
         </div>
       </div>
     );

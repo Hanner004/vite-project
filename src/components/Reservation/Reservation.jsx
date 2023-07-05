@@ -87,14 +87,14 @@ export default function Reservation() {
                   )}
                 </td>
                 <td>
-                  <Link to={`/reservation/${item.reservation_id}/books`} className="btn btn-primary">
+                  <Link to={`/reservation/${item.reservation_id}/books`} className="btn btn-outline-primary">
                     <i className="fa-solid fa-circle-info"></i>
                   </Link>
                 </td>
                 <td>
                   <button
                     disabled={item.reservation_status !== ReservationStatusEnum.ACTIVE}
-                    className="btn btn-secondary"
+                    className="btn btn-outline-secondary"
                     onClick={() => finalizeReservation(item.reservation_id)}
                   >
                     <i className="fa-solid fa-check-to-slot"></i>
@@ -103,7 +103,7 @@ export default function Reservation() {
                 <td>
                   <button
                     disabled={item.reservation_status !== ReservationStatusEnum.ACTIVE}
-                    className="btn btn-danger"
+                    className="btn btn-outline-danger"
                     onClick={() => deleteReservation(item.reservation_id)}
                   >
                     <i className="fa-solid fa-trash"></i>

@@ -46,10 +46,7 @@ export default function CreateReservation() {
 
   const handleAddItem = () => {
     if (numericValue.trim() === '') return;
-    setSelectedItems((prevItems) => [
-      ...prevItems,
-      { ...selectedItem, numericValue: parseInt(numericValue) },
-    ]);
+    setSelectedItems((prevItems) => [...prevItems, { ...selectedItem, numericValue: parseInt(numericValue) }]);
 
     const deleted = books.find((i) => i.book_id === selectedItem.value.book_id);
     setDeletedItems([...deletedItems, deleted]);
@@ -86,10 +83,7 @@ export default function CreateReservation() {
             </div>
             <div className="form-body border-bottom p-3">
               <div className="mb-3">
-                <ClientDropdown
-                  clients={clients}
-                  clientOptionClick={(option) => clientOptionClick(option)}
-                />
+                <ClientDropdown clients={clients} clientOptionClick={(option) => clientOptionClick(option)} />
               </div>
               <div className="mb-3">
                 <div className="row">
@@ -120,11 +114,7 @@ export default function CreateReservation() {
                     />
                   </div>
                   <div className="col-auto">
-                    <button
-                      disabled={numericValue < 1}
-                      className="btn btn-primary"
-                      onClick={handleAddItem}
-                    >
+                    <button disabled={numericValue < 1} className="btn btn-outline-primary" onClick={handleAddItem}>
                       <i className="fa-solid fa-circle-plus"></i>
                     </button>
                   </div>
@@ -132,15 +122,11 @@ export default function CreateReservation() {
               </div>
             </div>
             <div className="form-footer p-3">
-              <button
-                type="submit"
-                className="btn btn-primary mr-2"
-                disabled={selectedItems.length === 0}
-              >
+              <button type="submit" className="btn btn-outline-primary mr-2" disabled={selectedItems.length === 0}>
                 Agregar
               </button>
               &nbsp;
-              <button type="button" className="btn btn-secondary" onClick={handleCancel}>
+              <button type="button" className="btn btn-outline-secondary" onClick={handleCancel}>
                 Cancel
               </button>
             </div>
@@ -178,10 +164,7 @@ export default function CreateReservation() {
                 <td>{res.value.author_name + ' ' + res.value.author_lastname}</td>
                 <td>{res.value.editorial_name}</td>
                 <td>
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => handleRemoveItem(index, res)}
-                  >
+                  <button className="btn btn-outline-danger" onClick={() => handleRemoveItem(index, res)}>
                     <i className="fa-solid fa-trash"></i>
                   </button>
                 </td>

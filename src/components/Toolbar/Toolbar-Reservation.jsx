@@ -3,13 +3,7 @@ import { Link } from 'react-router-dom';
 import Select from 'react-select';
 import { ReservationStatusEnum } from '../../utils/enums/reservation.enum';
 
-export default function ToolbarReservation({
-  toPath,
-  searchTerm,
-  setSearchTerm,
-  placeholder,
-  setStatus,
-}) {
+export default function ToolbarReservation({ toPath, searchTerm, setSearchTerm, placeholder, setStatus }) {
   const handleOnChange = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -27,24 +21,13 @@ export default function ToolbarReservation({
   return (
     <div className="row mb-4 justify-content-between">
       <div className="col">
-        <input
-          type="text"
-          className="form-control"
-          value={searchTerm}
-          onChange={handleOnChange}
-          placeholder={placeholder}
-        />
+        <input type="text" className="form-control" value={searchTerm} onChange={handleOnChange} placeholder={placeholder} />
       </div>
       <div className="col">
-        <Select
-          options={options}
-          onChange={statusOptionClick}
-          placeholder="Estado"
-          isClearable
-        />
+        <Select options={options} onChange={statusOptionClick} placeholder="Estado" isClearable />
       </div>
       <div className="col-auto">
-        <Link to={toPath} className="btn btn-dark">
+        <Link to={toPath} className="btn btn-outline-dark">
           <i className="fa-solid fa-circle-plus"></i> Añadir
         </Link>
       </div>

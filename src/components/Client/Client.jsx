@@ -63,12 +63,12 @@ export default function Client() {
                 <td>{item.client_email}</td>
                 <td>{item.client_phone}</td>
                 <td>
-                  <Link to={`/client/update/${item.client_id}`} className="btn btn-warning">
+                  <Link to={`/client/update/${item.client_id}`} className="btn btn-outline-warning">
                     <i className="fa-solid fa-edit"></i>
                   </Link>
                 </td>
                 <td>
-                  <button className="btn btn-danger" onClick={() => deleteClient(item.client_id)}>
+                  <button className="btn btn-outline-danger" onClick={() => deleteClient(item.client_id)}>
                     <i className="fa-solid fa-trash"></i>
                   </button>
                 </td>

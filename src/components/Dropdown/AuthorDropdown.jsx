@@ -26,12 +26,7 @@ export default function AuthorDropdown({ authors, authorOptionClick, defaultValu
     return (
       <>
         <label className="form-label">Autor del libro</label>
-        <Select
-          options={options}
-          onChange={authorOptionClick}
-          placeholder="Selecciona una opción"
-          required
-        />
+        <Select options={options} onChange={authorOptionClick} placeholder="Selecciona una opción" required />
       </>
     );
   }

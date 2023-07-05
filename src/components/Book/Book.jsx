@@ -74,11 +74,11 @@ export default function Book() {
                     Autor: {item.author_name} {item.author_lastname}
                   </small>
                 </p>
-                <Link to={`/book/update/${item.book_id}`} className="btn btn-warning">
+                <Link to={`/book/update/${item.book_id}`} className="btn btn-outline-warning">
                   <i className="fa-solid fa-edit"></i>
                 </Link>
                 &nbsp;
-                <button className="btn btn-danger" onClick={() => deleteBook(item.book_id)}>
+                <button className="btn btn-outline-danger" onClick={() => deleteBook(item.book_id)}>
                   <i className="fa-solid fa-trash"></i>
                 </button>
               </div>

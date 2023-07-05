@@ -11,7 +11,6 @@ export default function ReservComponent({ reserv }) {
             <h3 className="m-0">Información de la reserva #{reserv.reservation_id}</h3>
           </div>
           <div className="form-body border-bottom p-3">
-
             <div className="mb-3">
               <div className="row">
                 <div className="col">
@@ -29,12 +28,7 @@ export default function ReservComponent({ reserv }) {
               <div className="row">
                 <div className="col">
                   <label className="form-label">Nombre del cliente</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    disabled
-                    value={reserv.client_name + ' ' + reserv.client_lastname || ''}
-                  />
+                  <input type="text" className="form-control" disabled value={reserv.client_name + ' ' + reserv.client_lastname || ''} />
                 </div>
               </div>
             </div>
@@ -51,11 +45,10 @@ export default function ReservComponent({ reserv }) {
                 </div>
               </div>
             </div>
-            
           </div>
           <div className="form-footer p-3 align-items-right">
             <div className="d-flex justify-content-end">
-              <button type="button" className="btn btn-secondary" onClick={() => navigate('/reservation')}>
+              <button type="button" className="btn btn-outline-secondary" onClick={() => navigate('/reservation')}>
                 Regresar
               </button>
             </div>

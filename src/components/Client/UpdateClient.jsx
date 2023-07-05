@@ -173,11 +173,11 @@ export default function UpdateClient() {
             </div>
           </div>
           <div className="form-footer p-3">
-            <button type="submit" className="btn btn-primary mr-2">
+            <button type="submit" className="btn btn-outline-primary mr-2">
               Actualizar cliente
             </button>
             &nbsp;
-            <button type="button" className="btn btn-secondary" onClick={handleCancel}>
+            <button type="button" className="btn btn-outline-secondary" onClick={handleCancel}>
               Cancel
             </button>
           </div>

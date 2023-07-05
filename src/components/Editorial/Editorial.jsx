@@ -57,14 +57,11 @@ export default function Editorial() {
                 <p className="card-text">
                   <small>{item.editorial_description}</small>
                 </p>
-                <Link to={`/editorial/update/${item.editorial_id}`} className="btn btn-warning">
+                <Link to={`/editorial/update/${item.editorial_id}`} className="btn btn-outline-warning">
                   <i className="fa-solid fa-edit"></i>
                 </Link>
                 &nbsp;
-                <button
-                  className="btn btn-danger"
-                  onClick={() => deleteEditorial(item.editorial_id)}
-                >
+                <button className="btn btn-outline-danger" onClick={() => deleteEditorial(item.editorial_id)}>
                   <i className="fa-solid fa-trash"></i>
                 </button>
               </div>

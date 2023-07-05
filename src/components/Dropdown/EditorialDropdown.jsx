@@ -1,11 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 
-export default function EditorialDropdown({
-  editorials,
-  editorialOptionClick,
-  defaultValue,
-}) {
+export default function EditorialDropdown({ editorials, editorialOptionClick, defaultValue }) {
   const options = editorials.map((i) => {
     return {
       value: i,
@@ -30,12 +26,7 @@ export default function EditorialDropdown({
     return (
       <>
         <label className="form-label">Editorial del libro</label>
-        <Select
-          options={options}
-          onChange={editorialOptionClick}
-          placeholder="Selecciona una opción"
-          required
-        />
+        <Select options={options} onChange={editorialOptionClick} placeholder="Selecciona una opción" required />
       </>
     );
   }

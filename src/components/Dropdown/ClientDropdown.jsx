@@ -11,12 +11,7 @@ export default function ClientDropdown({ clients, clientOptionClick }) {
   return (
     <>
       <label className="form-label">Cliente de la reserva</label>
-      <Select
-        options={options}
-        onChange={clientOptionClick}
-        placeholder="Selecciona una opción"
-        required
-      />
+      <Select options={options} onChange={clientOptionClick} placeholder="Selecciona una opción" required />
     </>
   );
 }
