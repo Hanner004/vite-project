@@ -5,7 +5,7 @@ export default function AuthorDropdown({ authors, authorOptionClick, defaultValu
   const options = authors.map((i) => {
     return {
       value: i,
-      label: `#${i.author_id} - ${i.author_name} ${i.author_lastname}`,
+      label: `ID: ${i.author_id} - ${i.author_name} ${i.author_lastname}`,
     };
   });
   if (defaultValue?.value) {
@@ -18,6 +18,7 @@ export default function AuthorDropdown({ authors, authorOptionClick, defaultValu
           options={options}
           onChange={authorOptionClick}
           placeholder="Selecciona una opción"
+          required
         />
       </>
     );
@@ -29,6 +30,7 @@ export default function AuthorDropdown({ authors, authorOptionClick, defaultValu
           options={options}
           onChange={authorOptionClick}
           placeholder="Selecciona una opción"
+          required
         />
       </>
     );

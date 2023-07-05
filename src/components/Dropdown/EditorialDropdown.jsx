@@ -9,7 +9,7 @@ export default function EditorialDropdown({
   const options = editorials.map((i) => {
     return {
       value: i,
-      label: `#${i.editorial_id} - ${i.editorial_name}`,
+      label: `ID: ${i.editorial_id} - ${i.editorial_name}`,
     };
   });
   if (defaultValue?.value) {
@@ -22,6 +22,7 @@ export default function EditorialDropdown({
           options={options}
           onChange={editorialOptionClick}
           placeholder="Selecciona una opción"
+          required
         />
       </>
     );
@@ -33,6 +34,7 @@ export default function EditorialDropdown({
           options={options}
           onChange={editorialOptionClick}
           placeholder="Selecciona una opción"
+          required
         />
       </>
     );

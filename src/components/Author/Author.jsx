@@ -57,7 +57,10 @@ export default function Author() {
                   <i className="fa-solid fa-edit"></i>
                 </Link>
                 &nbsp;
-                <button className="btn btn-danger" onClick={() => deleteAuthor(item.author_id)}>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => deleteAuthor(item.author_id)}
+                >
                   <i className="fa-solid fa-trash"></i>
                 </button>
               </div>

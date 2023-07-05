@@ -39,7 +39,7 @@ export default function ToolbarReservation({
         <Select
           options={options}
           onChange={statusOptionClick}
-          placeholder="Filtrar por estado"
+          placeholder="Estado"
           isClearable
         />
       </div>
