@@ -12,7 +12,7 @@ export default function Toolbar({ showBtn, toPath, searchTerm, setSearchTerm, pl
           <input type="text" className="form-control" value={searchTerm} onChange={handleOnChange} placeholder={placeholder} />
         </div>
         <div className="col-auto">
-          <Link to={toPath} className="btn btn-outline-dark">
+          <Link to={toPath} className="btn btn-outline-primary">
             <i className="fa-solid fa-circle-plus"></i> Añadir
           </Link>
         </div>

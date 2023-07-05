@@ -1,9 +1,10 @@
-import axios from 'axios';
-import Swal from 'sweetalert2';
-import Select from 'react-select';
+import { warningToastAlert, errorToastAlert, successToastAlert } from '../../utils/Swal/sweet-alert';
+import { clientAPI, booksAPI, reservationAPI } from '../../utils/routesFormat';
 import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
+import axios from 'axios';
+import Select from 'react-select';
 import { useNavigate } from 'react-router-dom';
-import { clientAPI, booksAPI } from '../../utils/routesFormat';
 import ClientDropdown from '../Dropdown/ClientDropdown';
 
 export default function CreateReservation() {
@@ -33,6 +34,53 @@ export default function CreateReservation() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    if (!clientOption.client_id) {
+      warningToastAlert('El cliente es requerido en la reserva');
+    } else {
+      const booksToSave = selectedItems.map(({ numericValue, value }) => ({
+        bookId: value.book_id,
+        quantity: numericValue,
+      }));
+      console.log('booksToSave', booksToSave);
+      await axios
+        .post(reservationAPI, {
+          clientId: clientOption.client_id,
+          books: booksToSave,
+        })
+        .then(({ data, statusText }) => {
+          console.log(statusText);
+          console.log(data);
+          Swal.fire({
+            icon: 'success',
+            title: `Reserva #${data.id} agregada`,
+            text: `Reserva agregada correctamente.`,
+            showConfirmButton: false,
+            timer: 2000,
+          });
+          navigate('/reservation');
+        })
+        .catch(({ response }) => {
+          const { data, status } = response;
+          console.log(response.status);
+          console.log(data.message);
+          if (status === 409) {
+            if (data.message === 'client has an active reservation') {
+              return Swal.fire({
+                icon: 'warning',
+                title: 'Oops...',
+                text: 'El cliente tiene una reserva activa',
+                confirmButtonColor: 'Gray',
+              });
+            }
+          }
+          return Swal.fire({
+            icon: 'error',
+            title: response.statusText,
+            text: data.message[0],
+            confirmButtonColor: 'Gray',
+          });
+        });
+    }
   }
 
   async function handleCancel() {
@@ -44,18 +92,27 @@ export default function CreateReservation() {
   const [selectedItems, setSelectedItems] = useState([]);
   const [deletedItems, setDeletedItems] = useState([]);
 
+  console.log('selectedItems', selectedItems);
+
   const handleAddItem = () => {
-    if (numericValue.trim() === '') return;
-    setSelectedItems((prevItems) => [...prevItems, { ...selectedItem, numericValue: parseInt(numericValue) }]);
+    if (selectedItem) {
+      if (parseInt(numericValue) > parseInt(selectedItem.value.book_available)) {
+        setNumericValue(String(selectedItem.value.book_available));
+        warningToastAlert('Se ha excedido el valor máximo permitido de la cantidad disponible del libro');
+      } else {
+        if (numericValue.trim() === '') return;
+        setSelectedItems((prevItems) => [...prevItems, { ...selectedItem, numericValue: parseInt(numericValue) }]);
 
-    const deleted = books.find((i) => i.book_id === selectedItem.value.book_id);
-    setDeletedItems([...deletedItems, deleted]);
+        const deleted = books.find((i) => i.book_id === selectedItem.value.book_id);
+        setDeletedItems([...deletedItems, deleted]);
 
-    const list = books.filter((obj) => obj.book_id !== selectedItem.value.book_id);
-    setBooks(list);
+        const list = books.filter((obj) => obj.book_id !== selectedItem.value.book_id);
+        setBooks(list);
 
-    setSelectedItem(null);
-    setNumericValue('');
+        setSelectedItem(null);
+        setNumericValue('');
+      }
+    }
   };
 
   const handleRemoveItem = (index, res) => {
@@ -68,10 +125,6 @@ export default function CreateReservation() {
 
     setSelectedItems((prevItems) => prevItems.filter((_, i) => i !== index));
   };
-
-  // console.log('books', books);
-  // console.log('selectedItems', selectedItems);
-  // console.log('deletedItems', deletedItems);
 
   return (
     <>
@@ -103,18 +156,20 @@ export default function CreateReservation() {
                   </div>
                   <div className="col-4">
                     <input
+                      disabled={!selectedItem}
                       type="number"
                       min="1"
                       step="1"
                       pattern="[0-9]*"
-                      className="form-control"
+                      className={borderInputQuantityColor()}
                       placeholder="Cantidad"
                       value={numericValue}
                       onChange={(e) => setNumericValue(e.target.value)}
                     />
                   </div>
                   <div className="col-auto">
-                    <button disabled={numericValue < 1} className="btn btn-outline-primary" onClick={handleAddItem}>
+                    {console.log('selectedItem***', selectedItem)}
+                    <button type="button" disabled={numericValue < 1} className="btn btn-outline-primary" onClick={handleAddItem}>
                       <i className="fa-solid fa-circle-plus"></i>
                     </button>
                   </div>
@@ -175,6 +230,24 @@ export default function CreateReservation() {
       </div>
     </>
   );
+
+  function borderInputQuantityColor() {
+    let res = `form-control`;
+    if (selectedItem) {
+      if (numericValue) {
+        if (parseInt(numericValue) > parseInt(selectedItem?.value?.book_available)) {
+          res = `form-control border-danger`;
+        } else {
+          if (parseInt(numericValue) > 0) {
+            res = `form-control border-success`;
+          } else {
+            res = `form-control border-danger`;
+          }
+        }
+      }
+    }
+    return res;
+  }
 
   async function clientOptionClick(option) {
     setClientOption(option.value);
