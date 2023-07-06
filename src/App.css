@@ -32,3 +32,9 @@
 .not-available-book {
   background-color: red;
 }
+
+.custom-dropdown .custom-toggle,
+.custom-dropdown .custom-menu {
+  width: 200px;
+  text-align: center;
+}

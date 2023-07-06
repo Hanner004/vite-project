@@ -7,3 +7,4 @@ export const authorAPI = `${API}/authors`;
 export const booksAPI = `${API}/books`;
 export const clientAPI = `${API}/clients`;
 export const reservationAPI = `${API}/reservations`;
+export const authAPI = `${API}/auth`;
