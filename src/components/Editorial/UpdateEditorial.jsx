@@ -37,8 +37,8 @@ export default function UpdateEditorial() {
         console.log(data);
         Swal.fire({
           icon: 'success',
-          title: `Editorial #${editorialId} editado`,
-          text: 'Editorial actualizado correctamente.',
+          title: `Editorial editado`,
+          text: `Editorial actualizado correctamente.`,
           showConfirmButton: false,
           timer: 2000,
         });
@@ -51,7 +51,7 @@ export default function UpdateEditorial() {
         if (status === 409) {
           if (data.message === 'the editorial name is registered') {
             return Swal.fire({
-              icon: 'error',
+              icon: 'warning',
               title: 'Oops...',
               text: 'El nombre de la editorial se encuentra registrado en el sistema',
               confirmButtonColor: 'Gray',
@@ -76,9 +76,13 @@ export default function UpdateEditorial() {
       <div className="col mb-4">
         <form onSubmit={handleUpdate} className="border rounded">
           <div className="form-title p-3 border-bottom">
-            <h3 className="m-0">Actualizar editorial #{`${editorialId}`}</h3>
+            <h3 className="m-0">Actualizar editorial</h3>
           </div>
           <div className="form-body border-bottom p-3">
+            <div className="mb-3">
+              <label className="form-label">ID</label>
+              <input type="number" className="form-control" value={editorialId} disabled />
+            </div>
             <div className="mb-3">
               <label className="form-label">Nombre de la editorial</label>
               <input

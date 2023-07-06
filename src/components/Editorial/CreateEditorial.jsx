@@ -22,7 +22,7 @@ export default function CreateEditorial() {
         console.log(data);
         Swal.fire({
           icon: 'success',
-          title: `Editorial #${data.id} agregado`,
+          title: `Editorial agregado`,
           text: `Editorial agregado correctamente.`,
           showConfirmButton: false,
           timer: 2000,
@@ -36,7 +36,7 @@ export default function CreateEditorial() {
         if (status === 409) {
           if (data.message === 'the editorial name is registered') {
             return Swal.fire({
-              icon: 'error',
+              icon: 'warning',
               title: 'Oops...',
               text: 'El nombre de la editorial se encuentra registrado en el sistema',
               confirmButtonColor: 'Gray',

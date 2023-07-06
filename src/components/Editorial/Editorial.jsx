@@ -46,16 +46,20 @@ export default function Editorial() {
       {error && <Error message={error} />}
       {editorials.length === 0 && <InfoNotFound />}
       <div className="row">
-        {editorials?.map((item) => (
+        {editorials?.map((item, index) => (
           <div className="col-md-3 mb-4" key={item.editorial_id}>
             <div className="card">
               <img src="/editorial.jpg" className="card-img-top" alt={item.editorial_name} />
               <div className="card-body">
-                <h5 className="card-title">
-                  #{item.editorial_id} - {item.editorial_name}
-                </h5>
+                <h5 className="card-title">#{index + 1}</h5>
                 <p className="card-text">
-                  <small>{item.editorial_description}</small>
+                  <small>
+                    ID: {item.editorial_id}
+                    <br />
+                    Nombre: {item.editorial_name}
+                    <br />
+                    Descripción: {item.editorial_description}
+                  </small>
                 </p>
                 <Link to={`/editorial/update/${item.editorial_id}`} className="btn btn-outline-warning">
                   <i className="fa-solid fa-edit"></i>
@@ -89,7 +93,7 @@ export default function Editorial() {
           console.log(data);
           Swal.fire({
             icon: 'success',
-            title: `Editorial #${editorial_id} eliminado`,
+            title: `Editorial eliminado`,
             text: `Editorial eliminado correctamente.`,
             showConfirmButton: false,
             timer: 2000,
