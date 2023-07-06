@@ -46,7 +46,7 @@ export default function UpdateClient() {
         console.log(data);
         Swal.fire({
           icon: 'success',
-          title: `Cliente #${clientId} editado`,
+          title: `Cliente editado`,
           text: 'Cliente actualizado correctamente.',
           showConfirmButton: false,
           timer: 2000,
@@ -60,7 +60,7 @@ export default function UpdateClient() {
         if (status === 400) {
           if (data.message[0] === 'phone must be a valid phone number') {
             return Swal.fire({
-              icon: 'error',
+              icon: 'warning',
               title: 'Oops...',
               text: 'El número de teléfono no es válido',
               confirmButtonColor: 'Gray',
@@ -70,7 +70,7 @@ export default function UpdateClient() {
         if (status === 409) {
           if (data.message === 'the client dni is registered') {
             return Swal.fire({
-              icon: 'error',
+              icon: 'warning',
               title: 'Oops...',
               text: 'El DNI del cliente se encuentra registrado en el sistema',
               confirmButtonColor: 'Gray',
@@ -78,7 +78,7 @@ export default function UpdateClient() {
           }
           if (data.message === 'the client email is registered') {
             return Swal.fire({
-              icon: 'error',
+              icon: 'warning',
               title: 'Oops...',
               text: 'El correo del cliente se encuentra registrado en el sistema',
               confirmButtonColor: 'Gray',
@@ -103,9 +103,13 @@ export default function UpdateClient() {
       <div className="col mb-4">
         <form onSubmit={handleUpdate} className="border rounded">
           <div className="form-title p-3 border-bottom">
-            <h3 className="m-0">Actualizar cliente #{`${clientId}`}</h3>
+            <h3 className="m-0">Actualizar cliente</h3>
           </div>
           <div className="form-body border-bottom p-3">
+            <div className="mb-3">
+              <label className="form-label">ID</label>
+              <input type="number" className="form-control" value={clientId} disabled />
+            </div>
             <div className="mb-3">
               <label className="form-label">DNI del cliente</label>
               <input

@@ -28,7 +28,7 @@ export default function CreateAuthor() {
         console.log(data);
         Swal.fire({
           icon: 'success',
-          title: `Cliente #${data.id} agregado`,
+          title: `Cliente agregado`,
           text: `Cliente agregado correctamente.`,
           showConfirmButton: false,
           timer: 2000,
@@ -42,7 +42,7 @@ export default function CreateAuthor() {
         if (status === 400) {
           if (data.message[0] === 'phone must be a valid phone number') {
             return Swal.fire({
-              icon: 'error',
+              icon: 'warning',
               title: 'Oops...',
               text: 'El número de teléfono no es válido',
               confirmButtonColor: 'Gray',
@@ -52,7 +52,7 @@ export default function CreateAuthor() {
         if (status === 409) {
           if (data.message === 'the client dni is registered') {
             return Swal.fire({
-              icon: 'error',
+              icon: 'warning',
               title: 'Oops...',
               text: 'El DNI del cliente se encuentra registrado en el sistema',
               confirmButtonColor: 'Gray',
@@ -60,7 +60,7 @@ export default function CreateAuthor() {
           }
           if (data.message === 'the client email is registered') {
             return Swal.fire({
-              icon: 'error',
+              icon: 'warning',
               title: 'Oops...',
               text: 'El correo del cliente se encuentra registrado en el sistema',
               confirmButtonColor: 'Gray',

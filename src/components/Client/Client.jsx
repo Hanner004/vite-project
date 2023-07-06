@@ -44,6 +44,7 @@ export default function Client() {
           <thead className="table-dark">
             <tr className="text-center">
               <th scope="col">#</th>
+              <th scope="col">ID</th>
               <th scope="col">DNI</th>
               <th scope="col">Nombre</th>
               <th scope="col">Apellido</th>
@@ -54,9 +55,10 @@ export default function Client() {
             </tr>
           </thead>
           <tbody>
-            {clients?.map((item) => (
+            {clients?.map((item, index) => (
               <tr key={item.client_id} className="align-middle text-center">
-                <th scope="row">{item.client_id}</th>
+                <th scope="row">{index + 1}</th>
+                <td>{item.client_id}</td>
                 <td>{item.client_dni}</td>
                 <td>{item.client_name}</td>
                 <td>{item.client_lastname}</td>
@@ -99,7 +101,7 @@ export default function Client() {
           console.log(data);
           Swal.fire({
             icon: 'success',
-            title: `Cliente #${client_id} eliminado`,
+            title: `Cliente eliminado`,
             text: `Cliente eliminado correctamente.`,
             showConfirmButton: false,
             timer: 2000,

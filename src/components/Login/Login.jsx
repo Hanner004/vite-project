@@ -15,7 +15,7 @@ export default function Login() {
     event.preventDefault();
     await axios
       .post(login, {
-        email,
+        email: email.toLowerCase().trim(),
         password,
       })
       .then(({ data, statusText }) => {
