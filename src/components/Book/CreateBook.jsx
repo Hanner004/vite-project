@@ -43,7 +43,7 @@ export default function CreateBook() {
     event.preventDefault();
     if (!authorOption.author_id || !editorialOption.editorial_id) {
       Swal.fire({
-        icon: 'error',
+        icon: 'warning',
         title: 'Oops...',
         text: 'El autor y editorial son requeridos',
         confirmButtonColor: 'Gray',
@@ -63,7 +63,7 @@ export default function CreateBook() {
           console.log(data);
           Swal.fire({
             icon: 'success',
-            title: `Libro #${data.id} agregado`,
+            title: `Libro agregado`,
             text: `Libro agregado correctamente.`,
             showConfirmButton: false,
             timer: 2000,
@@ -77,7 +77,7 @@ export default function CreateBook() {
           if (status === 409) {
             if (data.message === 'the book name is registered') {
               return Swal.fire({
-                icon: 'error',
+                icon: 'warning',
                 title: 'Oops...',
                 text: 'El nombre del libro se encuentra registrado en el sistema',
                 confirmButtonColor: 'Gray',

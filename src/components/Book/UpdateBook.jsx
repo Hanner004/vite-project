@@ -83,7 +83,7 @@ export default function UpdateBook() {
     event.preventDefault();
     if (!authorOption.author_id || !editorialOption.editorial_id) {
       Swal.fire({
-        icon: 'error',
+        icon: 'warning',
         title: 'Oops...',
         text: 'El autor y editorial son requeridos',
         confirmButtonColor: 'Gray',
@@ -103,7 +103,7 @@ export default function UpdateBook() {
           console.log(data);
           Swal.fire({
             icon: 'success',
-            title: `Libro #${bookId} editado`,
+            title: `Libro editado`,
             text: `Libro actualizado correctamente.`,
             showConfirmButton: false,
             timer: 2000,
@@ -118,7 +118,7 @@ export default function UpdateBook() {
           if (status === 409) {
             if (data.message === 'the book name is registered') {
               return Swal.fire({
-                icon: 'error',
+                icon: 'warning',
                 title: 'Oops...',
                 text: 'El nombre del libro se encuentra registrado en el sistema',
                 confirmButtonColor: 'Gray',
@@ -144,9 +144,13 @@ export default function UpdateBook() {
       <div className="col mb-4">
         <form onSubmit={handleUpdate} className="border rounded">
           <div className="form-title p-3 border-bottom">
-            <h3 className="m-0">Actualizar libro #{`${bookId}`}</h3>
+            <h3 className="m-0">Actualizar libro</h3>
           </div>
           <div className="form-body border-bottom p-3">
+            <div className="mb-3">
+              <label className="form-label">ID</label>
+              <input type="number" className="form-control" value={bookId} disabled />
+            </div>
             <div className="mb-3">
               <label className="form-label">Nombre del libro</label>
               <input

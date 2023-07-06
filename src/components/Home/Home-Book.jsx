@@ -48,20 +48,23 @@ export default function HomeBook() {
       {error && <Error message={error} />}
       {books.length === 0 && <InfoNotFound />}
       <div className="row">
-        {books?.map((item) => (
+        {books?.map((item, index) => (
           <div className="col-md-3 mb-4" key={item.book_id}>
             <div className="card">
               <img src="/book.jpg" className="card-img-top" alt={item.book_name} />
               <div className="card-body">
                 <h5 className="card-title">
-                  #{item.book_id} {circleBookClass(item.book_available_quantity - item.book_current_amount_occupied)} - {item.book_name}
+                  #{index + 1} - {item.book_name}
                 </h5>
                 <p className="card-text">
                   <small>
+                    ID: {item.book_id}
+                    <br />
+                    Estado: {circleBookClass(item.book_available_quantity - item.book_current_amount_occupied)}
+                    <br />
                     Cantidad MAX: {item.book_available_quantity}
                     <br />
-                    Cantidad disponible:&nbsp;
-                    {item.book_available_quantity - item.book_current_amount_occupied}
+                    Cantidad disponible: {item.book_available_quantity - item.book_current_amount_occupied}
                     <br />
                     Ubicación: {item.book_library_location}
                     <br />
