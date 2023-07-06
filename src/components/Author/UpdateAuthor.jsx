@@ -37,7 +37,7 @@ export default function UpdateAuthor() {
         console.log(data);
         Swal.fire({
           icon: 'success',
-          title: `Autor #${authorId} editado`,
+          title: `Autor editado`,
           text: 'Autor actualizado correctamente.',
           showConfirmButton: false,
           timer: 2000,
@@ -51,7 +51,7 @@ export default function UpdateAuthor() {
         if (status === 409) {
           if (data.message === 'the author name is registered') {
             return Swal.fire({
-              icon: 'error',
+              icon: 'warning',
               title: 'Oops...',
               text: 'El nombre del autor se encuentra registrado en el sistema',
               confirmButtonColor: 'Gray',
@@ -76,9 +76,13 @@ export default function UpdateAuthor() {
       <div className="col mb-4">
         <form onSubmit={handleUpdate} className="border rounded">
           <div className="form-title p-3 border-bottom">
-            <h3 className="m-0">Actualizar autor #{`${authorId}`}</h3>
+            <h3 className="m-0">Actualizar autor</h3>
           </div>
           <div className="form-body border-bottom p-3">
+            <div className="mb-3">
+              <label className="form-label">ID</label>
+              <input type="number" className="form-control" value={authorId} disabled />
+            </div>
             <div className="mb-3">
               <label className="form-label">Nombre del autor</label>
               <input

@@ -22,7 +22,7 @@ export default function CreateAuthor() {
         console.log(data);
         Swal.fire({
           icon: 'success',
-          title: `Autor #${data.id} agregado`,
+          title: `Autor agregado`,
           text: `Autor agregado correctamente.`,
           showConfirmButton: false,
           timer: 2000,
@@ -36,7 +36,7 @@ export default function CreateAuthor() {
         if (status === 409) {
           if (data.message === 'the author name is registered') {
             return Swal.fire({
-              icon: 'error',
+              icon: 'warning',
               title: 'Oops...',
               text: 'El nombre del autor se encuentra registrado en el sistema',
               confirmButtonColor: 'Gray',

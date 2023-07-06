@@ -42,15 +42,19 @@ export default function Author() {
       {error && <Error message={error} />}
       {authors.length === 0 && <InfoNotFound />}
       <div className="row">
-        {authors?.map((item) => (
+        {authors?.map((item, index) => (
           <div className="col-md-3 mb-4" key={item.author_id}>
             <div className="card">
               <img src="/author.jpg" className="card-img-top" alt={item.author_name} />
               <div className="card-body">
-                <h5 className="card-title">#{item.author_id}</h5>
+                <h5 className="card-title">#{index + 1}</h5>
                 <p className="card-text">
                   <small>
-                    {item.author_name} {item.author_lastname}
+                    ID: {item.author_id}
+                    <br />
+                    Nombre: {item.author_name}
+                    <br />
+                    Apellido: {item.author_lastname}
                   </small>
                 </p>
                 <Link to={`/author/update/${item.author_id}`} className="btn btn-outline-warning">
@@ -85,7 +89,7 @@ export default function Author() {
           console.log(data);
           Swal.fire({
             icon: 'success',
-            title: `Autor #${author_id} eliminado`,
+            title: `Autor eliminado`,
             text: `Autor eliminado correctamente.`,
             showConfirmButton: false,
             timer: 2000,
