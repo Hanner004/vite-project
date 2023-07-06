@@ -8,25 +8,29 @@ export default function ReservComponent({ reserv }) {
       <div className="col mb-4">
         <form className="border rounded">
           <div className="form-title p-3 border-bottom">
-            <h3 className="m-0">Información de la reserva #{reserv.reservation_id}</h3>
+            <h3 className="m-0">Información de la reserva</h3>
           </div>
           <div className="form-body border-bottom p-3">
 
             <div className="mb-3">
               <div className="row">
                 <div className="col">
-                  <label className="form-label">Estado de la reserva</label>
-                  <input type="text" className="form-control" disabled value={reserv.reservation_status || ''} />
+                  <label className="form-label">ID</label>
+                  <input type="number" className="form-control" value={reserv.reservation_id || ''} disabled />
                 </div>
                 <div className="col">
-                  <label className="form-label">DNI del cliente</label>
-                  <input type="text" className="form-control" disabled value={reserv.client_dni || ''} />
+                  <label className="form-label">Estado de la reserva</label>
+                  <input type="text" className="form-control" disabled value={reserv.reservation_status || ''} />
                 </div>
               </div>
             </div>
 
             <div className="mb-3">
               <div className="row">
+                <div className="col">
+                  <label className="form-label">DNI del cliente</label>
+                  <input type="text" className="form-control" disabled value={reserv.client_dni || ''} />
+                </div>
                 <div className="col">
                   <label className="form-label">Nombre del cliente</label>
                   <input type="text" className="form-control" disabled value={reserv.client_name + ' ' + reserv.client_lastname || ''} />

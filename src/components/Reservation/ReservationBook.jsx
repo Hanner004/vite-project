@@ -55,7 +55,7 @@ export default function ReservationBook() {
         <table className="table table-sm">
           <thead className="table-dark">
             <tr className="text-center">
-              <th colSpan={7} className="p-3">
+              <th colSpan={8} className="p-3">
                 Libros asignados a la reservación
               </th>
             </tr>
@@ -63,6 +63,7 @@ export default function ReservationBook() {
           <thead className="table-dark">
             <tr className="text-center">
               <th scope="col">#</th>
+              <th scope="col">Identificación del libro</th>
               <th scope="col">Nombre del libro</th>
               <th scope="col">Cantidad solicitada</th>
               <th scope="col">ISBN</th>
@@ -75,6 +76,7 @@ export default function ReservationBook() {
             {reservBooks?.map((item, index) => (
               <tr key={index + 1} className="align-middle text-center">
                 <th scope="row">{index + 1}</th>
+                <td>{item.book_id}</td>
                 <td>{item.book_name}</td>
                 <td>{item.reservationBook_quantity}</td>
                 <td>{item.book_isbn_code}</td>

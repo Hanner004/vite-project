@@ -56,6 +56,7 @@ export default function Reservation() {
           <thead className="table-dark">
             <tr className="text-center">
               <th scope="col">#</th>
+              <th scope="col">ID</th>
               <th scope="col">Cliente</th>
               <th scope="col">DNI</th>
               <th scope="col">Correo</th>
@@ -68,9 +69,10 @@ export default function Reservation() {
             </tr>
           </thead>
           <tbody>
-            {reservations?.map((item) => (
+            {reservations?.map((item, index) => (
               <tr key={item.reservation_id} className="align-middle text-center">
-                <th scope="row">{item.reservation_id}</th>
+                <th scope="row">{index + 1}</th>
+                <td>{item.reservation_id}</td>
                 <td>{item.client_name + ' ' + item.client_lastname}</td>
                 <td>{item.client_dni}</td>
                 <td>{item.client_email}</td>
@@ -136,7 +138,7 @@ export default function Reservation() {
           console.log(data);
           Swal.fire({
             icon: 'success',
-            title: `Reservación #${reservation_id} finalizada`,
+            title: `Reservación finalizada`,
             text: `Reservación finalizada correctamente.`,
             showConfirmButton: false,
             timer: 2000,
@@ -164,7 +166,7 @@ export default function Reservation() {
           console.log(data);
           Swal.fire({
             icon: 'success',
-            title: `Reservación #${reservation_id} eliminada`,
+            title: `Reservación eliminada`,
             text: `Reservación eliminada correctamente.`,
             showConfirmButton: false,
             timer: 2000,
@@ -179,7 +181,7 @@ export default function Reservation() {
     switch (status) {
       case ReservationStatusEnum.ACTIVE:
         return `Activo desde: ${dayjs(reservation_created_at)
-          .subtract(5, 'hours')
+          // .subtract(5, 'hours')
           // .format('dddd, DD/MMMM/YYYY, h:mm:ss A')
           .format('DD/MMMM/YYYY, h:mm:ss A')
           .toUpperCase()}`;

@@ -53,7 +53,7 @@ export default function CreateReservation() {
           console.log(data);
           Swal.fire({
             icon: 'success',
-            title: `Reserva #${data.id} agregada`,
+            title: `Reserva agregada`,
             text: `Reserva agregada correctamente.`,
             showConfirmButton: false,
             timer: 2000,
@@ -129,7 +129,7 @@ export default function CreateReservation() {
 
   return (
     <>
-
+    
       <div className="row">
         <div className="col mb-4">
           <form onSubmit={handleSubmit} className="border rounded">
@@ -195,7 +195,7 @@ export default function CreateReservation() {
         <table className="table table-sm">
           <thead className="table-dark">
             <tr className="text-center">
-              <th colSpan={7} className="p-3">
+              <th colSpan={8} className="p-3">
                 Libros asignados a la reservación
               </th>
             </tr>
@@ -203,6 +203,7 @@ export default function CreateReservation() {
           <thead className="table-dark">
             <tr className="text-center">
               <th scope="col">#</th>
+              <th scope="col">Identificación del libro</th>
               <th scope="col">Nombre del libro</th>
               <th scope="col">Cantidad solicitada</th>
               <th scope="col">ISBN</th>
@@ -215,6 +216,7 @@ export default function CreateReservation() {
             {selectedItems?.map(({ label, numericValue, ...res }, index) => (
               <tr key={index + 1} className="align-middle text-center">
                 <th scope="row">{index + 1}</th>
+                <td>{res.value.book_id}</td>
                 <td>{res.value.book_name}</td>
                 <td>{numericValue}</td>
                 <td>{res.value.book_isbn_code}</td>
@@ -231,7 +233,7 @@ export default function CreateReservation() {
         </table>
       </div>
       {selectedItems.length === 0 && <InfoNotFound />}
-      
+
     </>
   );
 
