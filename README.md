@@ -1,6 +1,6 @@
-### Book Reserve
+### book-reserve
 
-This repository contains the front-end code for the Book Reserve project, developed as part of my technological degree project. Book Reserve is a React-based web application designed to facilitate the reservation of books.
+This repository contains the front-end code for the book-reserve project, developed as part of my technological degree project. book-reserve is a React-based web application designed to facilitate the reservation of books.
 
 ---
 
@@ -18,7 +18,7 @@ This repository contains the front-end code for the Book Reserve project, develo
 
 ### Overview
 
-Book Reserve is a web application aimed at simplifying the process of reserving books. It provides users with an intuitive interface to browse available books, view details, and make reservations.
+book-reserve is a web application aimed at simplifying the process of reserving books. It provides users with an intuitive interface to browse available books, view details, and make reservations.
 
 ### Features
 
@@ -58,7 +58,7 @@ Book Reserve is a web application aimed at simplifying the process of reserving 
 
 2. Open your browser and navigate to [http://localhost:3000](http://localhost:3000).
 
-3. Begin exploring the Book Reserve application.
+3. Begin exploring the book-reserve application.
 
 ### Technologies Used
 
