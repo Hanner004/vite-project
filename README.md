@@ -33,7 +33,7 @@ book-reserve is a web application aimed at simplifying the process of reserving 
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/your-username/book-reserve.git
+    git clone https://github.com/Hanner004/vite-project.git
     ```
 
 2. Navigate to the project directory:
